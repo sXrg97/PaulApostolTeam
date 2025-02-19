@@ -1,4 +1,5 @@
 import Image from "next/image"
+import Link from "next/link"
 
 export const Hero = () => {
   return (
@@ -20,9 +21,9 @@ export const Hero = () => {
           <h2 className="text-xl md:text-3xl text-center md:text-left">
             Ghidul tău despre cum sa ajungi în cea mai bună formă din viața ta
           </h2>
-          <button className="bg-red-500 hover:bg-red-700 px-4 py-2 text-xl text-white font-bold cursor-pointer">
+          <Link href={'#contact'} className="bg-red-500 hover:bg-red-700 px-4 py-2 text-xl text-white font-bold cursor-pointer">
             Incepe acum
-          </button>
+          </Link>
         </div>
       </div>
       
