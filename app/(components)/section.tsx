@@ -1,5 +1,4 @@
 import React from 'react'
-import { ScrollToTopButton } from './ScrollToTopButton'
 
 type Props = {
     id?: string,
@@ -39,8 +38,7 @@ export const Section = ({id, title, children, bg}: Props) => {
                 {children}
             </div>
             
-            {/* Scroll to top button for long sections - only visible when needed */}
-            {id && <ScrollToTopButton />}
+            {/* Scroll to top button removed - now globally available */}
         </div>
     </section>
   )
