@@ -307,9 +307,9 @@ export default function Home() {
         </p>
         <ul className="list-disc list-inside mb-6 text-lg">
           <li>Te înfometezi</li>
-          <li>Să mănânci alimente care nu îți plac</li>
-          <li>Să faci cardio încontinuu și să nu vezi nici un rezultat</li>
-          <li>Să simți că stai la același nivel</li>
+          <li>Mănânci alimente care nu îți plac</li>
+          <li>Faci cardio încontinuu și să nu vezi nici un rezultat</li>
+          <li>Simți că stai la același nivel</li>
         </ul>
         <p className="text-lg mb-6">
           Te invit să-mi trimiți un mesaj pe WhatsApp, unde vom discuta despre situația ta și vom concepe un plan personalizat împreună.

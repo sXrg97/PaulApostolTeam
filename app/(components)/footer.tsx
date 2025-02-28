@@ -67,7 +67,7 @@ export const Footer = () => {
                 <FaInstagram size={20} />
               </Link>
               <Link 
-                href="https://instagram.com/paulapostol_pt" 
+                href="https://www.tiktok.com/@antrenorpaulapostol" 
                 target="_blank"
                 className="bg-zinc-800 hover:bg-red-700 p-2.5 rounded-full transition-all duration-300"
                 aria-label="Instagram"
