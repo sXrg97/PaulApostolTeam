@@ -19,7 +19,7 @@ export const Hero = () => {
         />
       </div>
 
-      <div className="relative z-20 flex max-w-7xl mx-auto px-4 pb-16 w-full pt-28 md:pt-0">
+      <div className="relative z-20 flex max-w-7xl mx-auto px-4 pb-16 w-full pt-[20vh] md:pt-0">
         <div className="w-full md:w-[50%] flex flex-col items-center md:items-start gap-4 justify-center">
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-center md:text-left uppercase leading-tight">
             Paul Apostol
@@ -46,7 +46,7 @@ export const Hero = () => {
         </div>
       </div>
       
-      <div className="relative mt-4 md:mt-0 md:absolute bottom-0 right-0 md:right-2 lg:right-0 z-20 h-[40vh] sm:h-[50vh] md:h-[85vh] w-full flex justify-center md:justify-center">
+      <div className="mt-4 md:mt-0 absolute bottom-0 right-0 md:right-2 lg:right-0 z-20 h-[40vh] sm:h-[50vh] md:h-[85vh] w-full flex justify-center md:justify-center">
         <Image 
           width={1920} 
           height={1080} 
