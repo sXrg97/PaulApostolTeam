@@ -17,7 +17,7 @@ export const Header = () => {
     <div className='fixed top-0 left-0 right-0 z-50 bg-[#050505] text-white'>
       <header className='flex items-center justify-between max-w-7xl mx-auto h-[56px] md:h-[72px] px-4'>
         <span className='font-bold text-2xl md:text-4xl uppercase italic'>
-          Paul Apostol Team
+          Paul Apostol
         </span>
         <nav className="hidden md:block">
           <ul className='flex space-x-8 uppercase'>

@@ -1,68 +1,33 @@
 'use client'
 
-import { useState } from 'react';
+import { FaWhatsapp } from 'react-icons/fa';
 
 export const ContactForm = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: '',
-  });
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData(prevState => ({
-      ...prevState,
-      [name]: value,
-    }));
-  };
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    // Here you would typically send the form data to your server or a third-party service
-    console.log('Form submitted:', formData);
-    // Reset form after submission
-    setFormData({ name: '', email: '', message: '' });
+  const openWhatsApp = () => {
+    // Phone number should be in international format without '+' or spaces
+    const phoneNumber = '40757497530'; // IMPORTANT: Replace with your actual phone number in international format (e.g., 40 for Romania + your number without the first 0)
+    const message = encodeURIComponent('Bună! Sunt interesat/ă de serviciile tale de antrenament personal și nutriție.');
+    
+    // Create WhatsApp URL
+    const whatsappURL = `https://wa.me/${phoneNumber}?text=${message}`;
+    
+    // Open in a new tab
+    window.open(whatsappURL, '_blank');
   };
 
   return (
-    <form onSubmit={handleSubmit} className="max-w-md mx-auto">
-      <div className="mb-4">
-        <input
-          type="text"
-          name="name"
-          value={formData.name}
-          onChange={handleChange}
-          placeholder="Numele tău"
-          className="w-full p-2 bg-gray-900 border border-gray-700 rounded-md text-white"
-          required
-        />
-      </div>
-      <div className="mb-4">
-        <input
-          type="email"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-          placeholder="Email-ul tău"
-          className="w-full p-2 bg-gray-900 border border-gray-700 rounded-md text-white"
-          required
-        />
-      </div>
-      <div className="mb-4">
-        <textarea
-          name="message"
-          value={formData.message}
-          onChange={handleChange}
-          placeholder="Mesajul tău"
-          rows={4}
-          className="w-full p-2 bg-gray-900 border border-gray-700 rounded-md text-white"
-          required
-        ></textarea>
-      </div>
-      <button type="submit" className="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-md font-bold w-full">
-        Aplică Acum
+    <div className="max-w-md mx-auto text-center">
+      <p className="mb-6 text-lg">
+        Trimite-mi un mesaj pe WhatsApp și îți voi răspunde cât mai curând posibil!
+      </p>
+      
+      <button 
+        onClick={openWhatsApp} 
+        className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-md font-bold w-full flex items-center justify-center gap-2 text-xl"
+      >
+        <FaWhatsapp className="text-2xl" />
+        Conversează pe WhatsApp
       </button>
-    </form>
+    </div>
   );
 };

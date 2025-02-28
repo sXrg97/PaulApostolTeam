@@ -8,7 +8,7 @@ export const Footer = () => {
         <div className="flex flex-col md:flex-row justify-between items-center gap-6">
           <div>
             <span className="font-bold text-xl md:text-2xl uppercase italic">
-              Paul Apostol Team
+              Paul Apostol
             </span>
           </div>
           
@@ -38,7 +38,7 @@ export const Footer = () => {
         </div>
         
         <div className="mt-8 text-center text-gray-400 text-sm">
-          <p>© {new Date().getFullYear()} Paul Apostol Team. Toate drepturile rezervate.</p>
+          <p>© {new Date().getFullYear()} Paul Apostol. Toate drepturile rezervate.</p>
         </div>
       </div>
     </footer>

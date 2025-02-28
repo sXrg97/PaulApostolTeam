@@ -14,7 +14,7 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Paul Apostol Team",
+  title: "Paul Apostol",
   description: "Paul Apostol - Antrenorul tau personal. Ghidul tau catre o viata sanatoasa si activa.",
 };
 

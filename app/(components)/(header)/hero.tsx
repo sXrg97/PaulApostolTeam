@@ -7,21 +7,31 @@ export const Hero = () => {
       <Image 
         width={1920} 
         height={1080} 
-        src={'/bg-hero.png'} 
-        alt={'Paul Apostol Team'} 
-        className="absolute left-0 top-0 bottom-0 right-0 object-cover h-full w-full"
+        src={'/bg-hero.webp'} 
+        alt={'Paul Apostol'} 
+        className="absolute blur-sm left-0 top-0 bottom-0 right-0 object-cover h-full w-full"
         priority
       />
 
       <div className="relative z-10 flex max-w-7xl mx-auto px-4 py-20 md:py-8 w-full">
-        <div className="w-full md:w-[50%] flex flex-col items-center md:items-start gap-6 justify-center">
-          <h1 className="text-4xl md:text-5xl uppercase font-black text-center md:text-left">
-            Cum să ajungi la fizicul mult visat
+        <div className="w-full md:w-[50%] flex flex-col items-center md:items-start gap-4 justify-center">
+          <h1 className="text-5xl md:text-6xl font-black text-center md:text-left uppercase">
+            Paul Apostol
           </h1>
-          <h2 className="text-xl md:text-3xl text-center md:text-left">
-            Ghidul tău despre cum sa ajungi în cea mai bună formă din viața ta
-          </h2>
-          <Link href={'#contact'} className="bg-red-500 hover:bg-red-700 px-4 py-2 text-xl text-white font-bold cursor-pointer">
+          <p className="text-2xl md:text-3xl uppercase font-bold text-red-500 text-center md:text-left -mt-2 italic">
+            Antrenor Personal
+          </p>
+          
+          <div className="mt-6 space-y-2">
+            <h2 className="text-2xl md:text-3xl uppercase font-bold text-center md:text-left">
+              Cum să ajungi la fizicul mult visat
+            </h2>
+            <h3 className="text-lg md:text-xl text-center md:text-left">
+              Ghidul tău despre cum sa ajungi în cea mai bună formă din viața ta
+            </h3>
+          </div>
+          
+          <Link href={'#contact'} className="bg-red-500 hover:bg-red-700 px-4 py-2 text-xl text-white font-bold cursor-pointer mt-4">
             Incepe acum
           </Link>
         </div>
