@@ -3,17 +3,23 @@ import Link from "next/link"
 
 export const Hero = () => {
   return (
-    <div id="home" className='hero text-white min-h-[calc(100vh-72px)] relative overflow-hidden flex flex-col md:flex-row'>
-      <Image 
-        width={1920} 
-        height={1080} 
-        src={'/bg-hero.webp'} 
-        alt={'Paul Apostol'} 
-        className="absolute blur-sm left-0 top-0 bottom-0 right-0 object-cover h-full w-full"
-        priority
-      />
+    <div id="home" className='hero text-white min-h-screen relative overflow-hidden flex flex-col md:flex-row'>
+      {/* Dark overlay */}
+      <div className="absolute inset-0 bg-black/30 z-10"></div>
+      
+      {/* Background image with blur container */}
+      <div className="absolute inset-0 w-full h-full overflow-hidden">
+        <Image 
+          fill
+          src={'/bg-hero.webp'} 
+          alt={'Paul Apostol Background'} 
+          className="object-cover blur-sm scale-105" /* Scale to prevent white edges when blurring */
+          quality={90}
+          priority
+        />
+      </div>
 
-      <div className="relative z-10 flex max-w-7xl mx-auto px-4 py-20 md:py-8 w-full">
+      <div className="relative z-20 flex max-w-7xl mx-auto px-4 pb-16 w-full">
         <div className="w-full md:w-[50%] flex flex-col items-center md:items-start gap-4 justify-center">
           <h1 className="text-5xl md:text-6xl font-black text-center md:text-left uppercase">
             Paul Apostol
@@ -31,7 +37,7 @@ export const Hero = () => {
             </h3>
           </div>
           
-          <Link href={'#contact'} className="bg-red-500 hover:bg-red-700 px-4 py-2 text-xl text-white font-bold cursor-pointer mt-4">
+          <Link href={'#contact'} className="bg-red-500 hover:bg-red-700 px-6 py-3 text-xl text-white font-bold cursor-pointer mt-6 rounded-md">
             Incepe acum
           </Link>
         </div>
