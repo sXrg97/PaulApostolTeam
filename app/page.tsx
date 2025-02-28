@@ -80,17 +80,29 @@ export default function Home() {
 
       <Section title="Tot ce trebuie să știi pentru a slăbi sănătos" bg="#050505">
         <div className="grid md:grid-cols-3 gap-8">
-          <div className="bg-black p-6 rounded-lg">
-            <h3 className="text-xl font-bold mb-4">1. Necesarul caloric</h3>
-            <p>Cantitatea totală de calorii necesare zilnic pentru menținerea funcțiilor vitale și susținerea activității fizice.</p>
+          <div className="bg-gradient-to-br from-zinc-900 via-black to-zinc-900 p-6 rounded-lg border border-zinc-800 shadow-lg relative overflow-hidden">
+            <div className="absolute -top-8 -right-8 w-24 h-24 bg-red-600 opacity-5 rounded-full blur-2xl"></div>
+            <div className="flex items-center gap-2 mb-4">
+              <div className="h-5 w-1 bg-red-600 rounded-full"></div>
+              <h3 className="text-xl font-bold text-white">1. Necesarul caloric</h3>
+            </div>
+            <p className="text-zinc-300 relative z-10">Cantitatea totală de calorii necesare zilnic pentru menținerea funcțiilor vitale și susținerea activității fizice.</p>
           </div>
-          <div className="bg-black p-6 rounded-lg">
-            <h3 className="text-xl font-bold mb-4">2. Deficitul caloric</h3>
-            <p>Reducerea aportului caloric sub necesarul zilnic pentru a determina corpul să utilizeze rezervele de grăsime.</p>
+          <div className="bg-gradient-to-br from-zinc-900 via-black to-zinc-900 p-6 rounded-lg border border-zinc-800 shadow-lg relative overflow-hidden">
+            <div className="absolute -top-8 -right-8 w-24 h-24 bg-red-600 opacity-5 rounded-full blur-2xl"></div>
+            <div className="flex items-center gap-2 mb-4">
+              <div className="h-5 w-1 bg-red-600 rounded-full"></div>
+              <h3 className="text-xl font-bold text-white">2. Deficitul caloric</h3>
+            </div>
+            <p className="text-zinc-300 relative z-10">Reducerea aportului caloric sub necesarul zilnic pentru a determina corpul să utilizeze rezervele de grăsime.</p>
           </div>
-          <div className="bg-black p-6 rounded-lg">
-            <h3 className="text-xl font-bold mb-4">3. Calitatea alimentelor</h3>
-            <p>Alegerea alimentelor nutritive și echilibrate pentru a asigura sănătatea și energia necesară în procesul de slăbire.</p>
+          <div className="bg-gradient-to-br from-zinc-900 via-black to-zinc-900 p-6 rounded-lg border border-zinc-800 shadow-lg relative overflow-hidden">
+            <div className="absolute -top-8 -right-8 w-24 h-24 bg-red-600 opacity-5 rounded-full blur-2xl"></div>
+            <div className="flex items-center gap-2 mb-4">
+              <div className="h-5 w-1 bg-red-600 rounded-full"></div>
+              <h3 className="text-xl font-bold text-white">3. Calitatea alimentelor</h3>
+            </div>
+            <p className="text-zinc-300 relative z-10">Alegerea alimentelor nutritive și echilibrate pentru a asigura sănătatea și energia necesară în procesul de slăbire.</p>
           </div>
         </div>
         <CalorieCalculator />
@@ -132,11 +144,17 @@ export default function Home() {
       <Section id="servicii" title="Servicii și Tarife" bg="#050505">
         <div className="grid md:grid-cols-3 gap-8">
           {/* Antrenamente Personalizate */}
-          <div className="bg-black p-6 rounded-lg flex flex-col h-full">
-            <h3 className="text-2xl font-bold mb-2">Antrenamente Personalizate</h3>
+          <div className="bg-gradient-to-br from-zinc-900 via-black to-zinc-900 p-8 rounded-lg border border-zinc-800 shadow-xl relative flex flex-col h-full overflow-hidden">
+            {/* Decorative elements */}
+            <div className="absolute -top-10 -right-10 w-40 h-40 bg-red-600 opacity-5 rounded-full blur-3xl"></div>
+            
+            <div className="flex items-center gap-3 mb-4">
+              <div className="h-8 w-1 bg-red-600 rounded-full"></div>
+              <h3 className="text-2xl font-bold text-white">Antrenamente Personalizate</h3>
+            </div>
             <p className="text-red-500 font-semibold mb-6">🔥 Rezultate rapide cu atenție 100% asupra ta!</p>
             
-            <div className="mb-6">
+            <div className="mb-6 relative z-10">
               <h4 className="text-xl font-bold mb-2">Antrenament 1 la 1 (Plată lunară)</h4>
               <p className="text-xl text-red-500 font-bold mb-4">1000 lei / lună</p>
               <ul className="space-y-2">
@@ -159,7 +177,7 @@ export default function Home() {
               </ul>
             </div>
             
-            <div>
+            <div className="relative z-10">
               <h4 className="text-xl font-bold mb-2">Ședință individuală (1 la 1)</h4>
               <p className="text-xl text-red-500 font-bold mb-4">150 lei / ședință</p>
               <ul className="space-y-2">
@@ -180,11 +198,17 @@ export default function Home() {
           </div>
           
           {/* Antrenamente de Grup */}
-          <div className="bg-black p-6 rounded-lg flex flex-col h-full">
-            <h3 className="text-2xl font-bold mb-2">Antrenamente de Grup</h3>
+          <div className="bg-gradient-to-br from-zinc-900 via-black to-zinc-900 p-8 rounded-lg border border-zinc-800 shadow-xl relative flex flex-col h-full overflow-hidden">
+            {/* Decorative elements */}
+            <div className="absolute -top-10 -right-10 w-40 h-40 bg-red-600 opacity-5 rounded-full blur-3xl"></div>
+            
+            <div className="flex items-center gap-3 mb-4">
+              <div className="h-8 w-1 bg-red-600 rounded-full"></div>
+              <h3 className="text-2xl font-bold text-white">Antrenamente de Grup</h3>
+            </div>
             <p className="text-red-500 font-semibold mb-6">💪 Motivație și progres împreună!</p>
             
-            <div>
+            <div className="relative z-10">
               <h4 className="text-xl font-bold mb-2">Antrenament în grup (max. 3 persoane)</h4>
               <p className="text-xl text-red-500 font-bold mb-4">800 lei / persoană / lună</p>
               <ul className="space-y-2">
@@ -209,11 +233,17 @@ export default function Home() {
           </div>
           
           {/* Antrenamente Online */}
-          <div className="bg-black p-6 rounded-lg flex flex-col h-full">
-            <h3 className="text-2xl font-bold mb-2">Antrenamente Online</h3>
+          <div className="bg-gradient-to-br from-zinc-900 via-black to-zinc-900 p-8 rounded-lg border border-zinc-800 shadow-xl relative flex flex-col h-full overflow-hidden">
+            {/* Decorative elements */}
+            <div className="absolute -top-10 -right-10 w-40 h-40 bg-red-600 opacity-5 rounded-full blur-3xl"></div>
+            
+            <div className="flex items-center gap-3 mb-4">
+              <div className="h-8 w-1 bg-red-600 rounded-full"></div>
+              <h3 className="text-2xl font-bold text-white">Antrenamente Online</h3>
+            </div>
             <p className="text-red-500 font-semibold mb-6">📲 Performanță oriunde te afli!</p>
             
-            <div className="mb-6">
+            <div className="mb-6 relative z-10">
               <h4 className="text-xl font-bold mb-2">Antrenament 1 la 1 online</h4>
               <p className="text-xl text-red-500 font-bold mb-4">800 lei / lună</p>
               <ul className="space-y-2">
@@ -236,7 +266,7 @@ export default function Home() {
               </ul>
             </div>
             
-            <div>
+            <div className="relative z-10">
               <h4 className="text-xl font-bold mb-2">Online Coaching (plan personalizat + suport)</h4>
               <p className="text-xl text-red-500 font-bold mb-4">500 lei / lună</p>
               <ul className="space-y-2">
