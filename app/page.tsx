@@ -8,6 +8,7 @@ import { TransformationGallery } from "./(components)/transformation-gallery";
 import Image from "next/image";
 import { Footer } from "./(components)/footer";
 import Link from "next/link";
+import { Dumbbell } from "lucide-react";
 
 export default function Home() {
   return (
@@ -19,7 +20,7 @@ export default function Home() {
           
           <div className="md:w-1/2">
             <p className="text-lg mb-4">
-              Mă numesc Apostol Paul și, din 2019, îndrum femei și bărbați în procesul de slăbire și adoptare a unui stil de viață sănătos, indiferent dacă aleg să se antreneze în sala de fitness sau nu.
+              Mă numesc Apostol Paul și, din 2019, îndrum femei și bărbați în procesul de slăbire, dezvoltare musculară și adoptare a unui stil de viață sănătos, indiferent dacă aleg să se antreneze în sala de fitness sau nu.
             </p>
             <p className="text-lg mb-4">
               Am descoperit fitnessul în 2014, când nemulțumirea față de propriul corp m-a determinat să fac o schimbare. Primele luni de antrenament au fost o provocare, dar progresul vizibil și transformarea prin care am trecut m-au motivat să continui. Cu timpul, sportul a devenit mai mult decât o simplă activitate – o parte esențială a vieții mele. Odată cu experiența acumulată, tot mai mulți prieteni mi-au cerut sfaturi pentru a-și îmbunătăți forma fizică, iar în acel moment am realizat că acesta este drumul pe care vreau să merg.
@@ -159,19 +160,19 @@ export default function Home() {
               <p className="text-xl text-red-500 font-bold mb-4">1000 lei / lună</p>
               <ul className="space-y-2">
                 <li className="flex items-start">
-                  <span className="text-red-500 mr-2">✔</span>
+                  <span className="text-red-500 mr-2"> <Dumbbell /></span>
                   <span>Program de antrenament personalizat în funcție de obiectivele tale (slăbire, creștere musculară, tonifiere)</span>
                 </li>
                 <li className="flex items-start">
-                  <span className="text-red-500 mr-2">✔</span>
+                  <span className="text-red-500 mr-2"> <Dumbbell /></span>
                   <span>Corectarea tehnicii de execuție pentru eficiență maximă și prevenirea accidentărilor</span>
                 </li>
                 <li className="flex items-start">
-                  <span className="text-red-500 mr-2">✔</span>
+                  <span className="text-red-500 mr-2"> <Dumbbell /></span>
                   <span>Monitorizare progres și ajustare a planului de antrenament</span>
                 </li>
                 <li className="flex items-start">
-                  <span className="text-red-500 mr-2">✔</span>
+                  <span className="text-red-500 mr-2"> <Dumbbell /></span>
                   <span>Recomandări privind alimentația și stilul de viață</span>
                 </li>
               </ul>
@@ -182,15 +183,15 @@ export default function Home() {
               <p className="text-xl text-red-500 font-bold mb-4">150 lei / ședință</p>
               <ul className="space-y-2">
                 <li className="flex items-start">
-                  <span className="text-red-500 mr-2">✔</span>
+                  <span className="text-red-500 mr-2"> <Dumbbell /></span>
                   <span>Perfect pentru cei care vor să testeze un antrenament personalizat înainte de a alege un abonament</span>
                 </li>
                 <li className="flex items-start">
-                  <span className="text-red-500 mr-2">✔</span>
+                  <span className="text-red-500 mr-2"> <Dumbbell /></span>
                   <span>Corectarea posturii și ajustarea antrenamentului la nevoile tale</span>
                 </li>
                 <li className="flex items-start">
-                  <span className="text-red-500 mr-2">✔</span>
+                  <span className="text-red-500 mr-2"> <Dumbbell /></span>
                   <span>Potrivit pentru oricine, indiferent de nivelul de experiență</span>
                 </li>
               </ul>
@@ -213,19 +214,19 @@ export default function Home() {
               <p className="text-xl text-red-500 font-bold mb-4">800 lei / persoană / lună</p>
               <ul className="space-y-2">
                 <li className="flex items-start">
-                  <span className="text-red-500 mr-2">✔</span>
+                  <span className="text-red-500 mr-2"> <Dumbbell /></span>
                   <span>Îmbină beneficiile antrenamentului personalizat cu energia unui grup mic</span>
                 </li>
                 <li className="flex items-start">
-                  <span className="text-red-500 mr-2">✔</span>
+                  <span className="text-red-500 mr-2"> <Dumbbell /></span>
                   <span>Exerciții adaptate nivelului fiecărui participant</span>
                 </li>
                 <li className="flex items-start">
-                  <span className="text-red-500 mr-2">✔</span>
+                  <span className="text-red-500 mr-2"> <Dumbbell /></span>
                   <span>Suport și motivație constantă într-un mediu dinamic</span>
                 </li>
                 <li className="flex items-start">
-                  <span className="text-red-500 mr-2">✔</span>
+                  <span className="text-red-500 mr-2"> <Dumbbell /></span>
                   <span>Ideal pentru prieteni sau colegi care vor să se antreneze împreună</span>
                 </li>
               </ul>
@@ -248,19 +249,19 @@ export default function Home() {
               <p className="text-xl text-red-500 font-bold mb-4">800 lei / lună</p>
               <ul className="space-y-2">
                 <li className="flex items-start">
-                  <span className="text-red-500 mr-2">✔</span>
+                  <span className="text-red-500 mr-2"> <Dumbbell /></span>
                   <span>Plan de antrenament personalizat, adaptat echipamentului disponibil acasă sau la sală</span>
                 </li>
                 <li className="flex items-start">
-                  <span className="text-red-500 mr-2">✔</span>
+                  <span className="text-red-500 mr-2"> <Dumbbell /></span>
                   <span>Corectarea tehnicii prin sesiuni video live</span>
                 </li>
                 <li className="flex items-start">
-                  <span className="text-red-500 mr-2">✔</span>
+                  <span className="text-red-500 mr-2"> <Dumbbell /></span>
                   <span>Monitorizare săptămânală și ajustare a programului</span>
                 </li>
                 <li className="flex items-start">
-                  <span className="text-red-500 mr-2">✔</span>
+                  <span className="text-red-500 mr-2"> <Dumbbell /></span>
                   <span>Suport și ghidare pentru menținerea motivației</span>
                 </li>
               </ul>
@@ -271,19 +272,23 @@ export default function Home() {
               <p className="text-xl text-red-500 font-bold mb-4">500 lei / lună</p>
               <ul className="space-y-2">
                 <li className="flex items-start">
-                  <span className="text-red-500 mr-2">✔</span>
+                  <span className="text-red-500 mr-2"><Dumbbell /></span>
                   <span>Program personalizat creat în funcție de obiectivele tale și nivelul de experiență</span>
                 </li>
                 <li className="flex items-start">
-                  <span className="text-red-500 mr-2">✔</span>
-                  <span>Recomandări alimentare adaptate stilului tău de viață</span>
+                  <span className="text-red-500 mr-2"> <Dumbbell /></span>
+                  <span>Plan nutrițional personalizat in funcție de stilul tău de viață</span>
                 </li>
                 <li className="flex items-start">
-                  <span className="text-red-500 mr-2">✔</span>
-                  <span>Monitorizare constantă a progresului și ajustări periodice</span>
+                  <span className="text-red-500 mr-2"> <Dumbbell /></span>
+                  <span>Plan de antrenament personal in funcție de obiectivele tale</span>
                 </li>
                 <li className="flex items-start">
-                  <span className="text-red-500 mr-2">✔</span>
+                  <span className="text-red-500 mr-2"> <Dumbbell /></span>
+                  <span>Monitorizare de 2 ori pe săptămână a rezultatelor și adaptarea planurilor in funcție de progres</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-red-500 mr-2"> <Dumbbell /></span>
                   <span>Suport prin mesaje pentru întrebări și îndrumare</span>
                 </li>
               </ul>

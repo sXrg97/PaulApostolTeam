@@ -45,12 +45,9 @@ export const metadata: Metadata = {
   },
   
   icons: {
-    icon: [
-      { url: '/favicon_white.ico' }
-    ],
-    apple: [
-      { url: '/paul_apostol_apple_logo_white.png' }
-    ]
+    icon: '/favicon.ico',
+    apple: '/apple-touch-icon.png',
+    shortcut: '/favicon.ico'
   }
 };
 
