@@ -14,8 +14,42 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Paul Apostol",
-  description: "Paul Apostol - Antrenorul tau personal. Ghidul tau catre o viata sanatoasa si activa.",
+  title: "Paul Apostol - Antrenor Personal & Specialist în Nutriție",
+  description: "Ghidul tău personalizat către o viață sănătoasă și activă. Transformă-ți corpul și obiceiurile cu planuri de nutriție și antrenamente adaptate nevoilor tale.",
+  
+  // Open Graph / Facebook metadata
+  openGraph: {
+    type: "website",
+    title: "Paul Apostol - Antrenor Personal & Specialist în Nutriție",
+    description: "Ghidul tău personalizat către o viață sănătoasă și activă. Transformă-ți corpul și obiceiurile cu planuri de nutriție și antrenamente adaptate nevoilor tale.",
+    images: [
+      {
+        url: "/paul_apostol_logo_white.png",
+        width: 1200,
+        height: 630,
+        alt: "Paul Apostol Logo"
+      }
+    ],
+    siteName: "Paul Apostol"
+  },
+  
+  // Twitter metadata
+  twitter: {
+    card: "summary_large_image",
+    title: "Paul Apostol - Antrenor Personal & Specialist în Nutriție",
+    description: "Ghidul tău personalizat către o viață sănătoasă și activă. Transformă-ți corpul și obiceiurile cu planuri de nutriție și antrenamente adaptate nevoilor tale.",
+    images: ["/paul_apostol_logo_white.png"],
+    // creator: "@paulapostol"
+  },
+  
+  icons: {
+    icon: [
+      { url: '/favicon_white.ico' }
+    ],
+    apple: [
+      { url: '/paul_apostol_apple_logo_white.png' }
+    ]
+  }
 };
 
 export default function RootLayout({

@@ -19,10 +19,10 @@ export default function Home() {
           
           <div className="md:w-1/2">
             <p className="text-lg mb-4">
-              Mă numesc Apostol Paul și, din 2019, îndrum femei și bărbați în procesul de slăbire și adoptare a unui stil de viață sănătos, indiferent dacă aleg să se antreneze în sala de fitness sau nu.
+              Mă numesc Apostol Paul și, din 2019, îndrum femei și bărbați în procesul de slăbire și adoptare a unui stil de viață sănătos, indiferent dacă aleg să se antreneze în sala de fitness sau nu.
             </p>
             <p className="text-lg mb-4">
-              Am descoperit fitnessul în 2014, când nemulțumirea față de propriul corp m-a determinat să fac o schimbare. Primele luni de antrenament au fost o provocare, dar progresul vizibil și transformarea prin care am trecut m-au motivat să continui. Cu timpul, sportul a devenit mai mult decât o simplă activitate – o parte esențială a vieții mele. Odată cu experiența acumulată, tot mai mulți prieteni mi-au cerut sfaturi pentru a-și îmbunătăți forma fizică, iar în acel moment am realizat că acesta este drumul pe care vreau să merg.
+              Am descoperit fitnessul în 2014, când nemulțumirea față de propriul corp m-a determinat să fac o schimbare. Primele luni de antrenament au fost o provocare, dar progresul vizibil și transformarea prin care am trecut m-au motivat să continui. Cu timpul, sportul a devenit mai mult decât o simplă activitate – o parte esențială a vieții mele. Odată cu experiența acumulată, tot mai mulți prieteni mi-au cerut sfaturi pentru a-și îmbunătăți forma fizică, iar în acel moment am realizat că acesta este drumul pe care vreau să merg.
             </p>
           </div>
           <div className="md:w-1/2">
@@ -37,7 +37,7 @@ export default function Home() {
         </div>
       </Section>
 
-      <Section title="Experiența mea" bg="#050505">
+      <Section id="experienta" title="Experiența mea" bg="#050505">
         <div className="flex flex-col md:flex-row gap-8">
           <div className="md:w-1/2">
             <ul className="space-y-4 text-lg">
@@ -74,11 +74,11 @@ export default function Home() {
         </div>
       </Section>
 
-      <Section title="Transformări" bg="#1a1a1a">
+      <Section id="transformari" title="Transformări" bg="#1a1a1a">
         <TransformationGallery />
       </Section>
 
-      <Section title="Tot ce trebuie să știi pentru a slăbi sănătos" bg="#050505">
+      <Section id="slabire-sanatoasa" title="Tot ce trebuie să știi pentru a slăbi sănătos" bg="#050505">
         <div className="grid md:grid-cols-3 gap-8">
           <div className="bg-gradient-to-br from-zinc-900 via-black to-zinc-900 p-6 rounded-lg border border-zinc-800 shadow-lg relative overflow-hidden">
             <div className="absolute -top-8 -right-8 w-24 h-24 bg-red-600 opacity-5 rounded-full blur-2xl"></div>
@@ -108,7 +108,7 @@ export default function Home() {
         <CalorieCalculator />
       </Section>
 
-      <Section title="Beneficiile Sportului" bg="#1a1a1a">
+      <Section id="beneficii" title="Beneficiile Sportului" bg="#1a1a1a">
         <ul className="space-y-4 text-lg">
           <li>✓ Întărește sistemul cardiovascular</li>
           <li>✓ Crește forța musculară</li>
@@ -119,7 +119,7 @@ export default function Home() {
         </ul>
       </Section>
 
-      <Section title="Odihna și Recuperarea" bg="#050505">
+      <Section id="odihna" title="Odihna și Recuperarea" bg="#050505">
         <ul className="space-y-4 text-lg">
           <li>✓ Esențiale pentru sănătate: Odihna și recuperarea sunt la fel de importante ca și antrenamentele.</li>
           <li>✓ Refacerea mușchilor: După exerciții intense, corpul are nevoie de timp pentru a-și reface mușchii și pentru a preveni accidentările.</li>
@@ -128,7 +128,7 @@ export default function Home() {
         </ul>
       </Section>
 
-      <Section title="Testimoniale" bg="#1a1a1a">
+      <Section id="testimoniale" title="Testimoniale" bg="#1a1a1a">
         <div className="grid md:grid-cols-2 gap-8">
           <Testimonial
             quote="Paul m-a ajutat să dau jos 40 de kg! Am ajuns de la 120 la 80 de kg. Sunt extrem de mulțumit de rezultate și de abordarea lui profesionistă."

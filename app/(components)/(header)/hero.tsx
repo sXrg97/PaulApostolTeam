@@ -19,38 +19,43 @@ export const Hero = () => {
         />
       </div>
 
-      <div className="relative z-20 flex max-w-7xl mx-auto px-4 pb-16 w-full">
+      <div className="relative z-20 flex max-w-7xl mx-auto px-4 pb-16 w-full pt-28 md:pt-0">
         <div className="w-full md:w-[50%] flex flex-col items-center md:items-start gap-4 justify-center">
-          <h1 className="text-5xl md:text-6xl font-black text-center md:text-left uppercase">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-center md:text-left uppercase leading-tight">
             Paul Apostol
           </h1>
-          <p className="text-2xl md:text-3xl uppercase font-bold text-red-500 text-center md:text-left -mt-2 italic">
+          <p className="text-xl sm:text-2xl md:text-3xl uppercase font-bold text-red-500 text-center md:text-left -mt-2 italic">
             Antrenor Personal
           </p>
           
-          <div className="mt-6 space-y-2">
-            <h2 className="text-2xl md:text-3xl uppercase font-bold text-center md:text-left">
+          <div className="mt-4 md:mt-6 space-y-2 max-w-md">
+            <h2 className="text-xl sm:text-2xl md:text-3xl uppercase font-bold text-center md:text-left leading-tight">
               Cum să ajungi la fizicul mult visat
             </h2>
-            <h3 className="text-lg md:text-xl text-center md:text-left">
+            <h3 className="text-base sm:text-lg md:text-xl text-center md:text-left">
               Ghidul tău despre cum sa ajungi în cea mai bună formă din viața ta
             </h3>
           </div>
           
-          <Link href={'#contact'} className="bg-red-500 hover:bg-red-700 px-6 py-3 text-xl text-white font-bold cursor-pointer mt-6 rounded-md">
-            Incepe acum
+          <Link 
+            href={'#contact'} 
+            className="bg-red-600 hover:bg-red-700 px-6 py-3 text-lg text-white font-bold cursor-pointer mt-6 rounded-md transition-colors shadow-lg"
+          >
+            Începe acum
           </Link>
         </div>
       </div>
       
-      <Image 
-        width={1920} 
-        height={1080} 
-        src={'/paul.png'} 
-        alt={'Paul Apostol'} 
-        className="relative md:absolute bottom-0 right-0 md:-right-60 z-20 h-[60vh] md:h-[85vh] object-contain"
-        priority
-      />
+      <div className="relative mt-4 md:mt-0 md:absolute bottom-0 right-0 md:right-2 lg:right-0 z-20 h-[40vh] sm:h-[50vh] md:h-[85vh] w-full flex justify-center md:justify-center">
+        <Image 
+          width={1920} 
+          height={1080} 
+          src={'/paul.png'} 
+          alt={'Paul Apostol'} 
+          className="h-full w-auto md:absolute md:right-[25%] object-contain"
+          priority
+        />
+      </div>
     </div>
   )
 }

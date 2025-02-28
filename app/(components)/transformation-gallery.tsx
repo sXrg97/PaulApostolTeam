@@ -24,7 +24,7 @@ export const TransformationGallery = () => {
     };
   
     return (
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
         {transformations.map((transformation, index) => (
           <div 
             key={index} 
@@ -41,10 +41,10 @@ export const TransformationGallery = () => {
               <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-0 group-hover:opacity-60 transition-opacity duration-300"></div>
             </div>
             
-            <div className="p-6 flex flex-col flex-grow">
+            <div className="p-4 sm:p-6 flex flex-col flex-grow">
               <div className="flex items-center gap-2 mb-3">
                 <div className="h-5 w-1 bg-red-600 rounded-full"></div>
-                <h3 className="text-2xl font-bold text-white">{transformation.name}</h3>
+                <h3 className="text-xl sm:text-2xl font-bold text-white">{transformation.name}</h3>
               </div>
               
               <div className="mb-4 inline-block bg-red-900/30 text-red-400 font-semibold px-3 py-1 rounded-full text-sm">
@@ -60,10 +60,15 @@ export const TransformationGallery = () => {
                   // Expanded view - show full text
                   <p>{transformation.description}</p>
                 ) : (
-                  // Collapsed view - show preview with gradient fade at bottom
+                  // Collapsed view - show preview with gradient fade that matches the card's background pattern
                   <div className="relative">
                     <p className="line-clamp-3">{transformation.description}</p>
-                    <div className="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-black to-transparent"></div>
+                    <div 
+                      className="absolute bottom-0 left-0 right-0 h-10"
+                      style={{
+                        background: 'linear-gradient(to top, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0) 100%)'
+                      }}
+                    ></div>
                   </div>
                 )}
                 
@@ -73,9 +78,23 @@ export const TransformationGallery = () => {
                     e.preventDefault();
                     toggleExpand(index);
                   }}
-                  className="mt-3 text-red-400 hover:text-red-300 text-sm font-medium focus:outline-none transition-colors"
+                  className="mt-3 text-red-400 hover:text-red-300 text-sm font-medium focus:outline-none transition-colors flex items-center gap-1"
                 >
-                  {expandedStates[index] ? 'Arată mai puțin' : 'Arată mai mult'}
+                  {expandedStates[index] ? (
+                    <>
+                      Arată mai puțin
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
+                      </svg>
+                    </>
+                  ) : (
+                    <>
+                      Arată mai mult
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                      </svg>
+                    </>
+                  )}
                 </button>
               </div>
             </div>

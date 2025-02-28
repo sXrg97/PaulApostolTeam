@@ -9,8 +9,25 @@ export const CalorieCalculator = () => {
   const [age, setAge] = useState('');
   const [activityLevel, setActivityLevel] = useState('1.2');
   const [bmr, setBmr] = useState(0);
+  const [error, setError] = useState('');
 
   const calculateBMR = () => {
+    // Reset previous results and errors
+    setBmr(0);
+    setError('');
+    
+    // Validate all required fields
+    if (!weight || !height || !age) {
+      setError('Te rugăm să completezi toate câmpurile pentru a calcula necesarul caloric.');
+      return;
+    }
+    
+    // Validate input values
+    if (parseFloat(weight) <= 0 || parseFloat(height) <= 0 || parseFloat(age) <= 0) {
+      setError('Te rugăm să introduci valori pozitive pentru greutate, înălțime și vârstă.');
+      return;
+    }
+
     let result = 0;
     if (gender === 'female') {
       result = 655.1 + (9.563 * parseFloat(weight)) + (1.85 * parseFloat(height)) - (4.676 * parseFloat(age));
@@ -51,6 +68,7 @@ export const CalorieCalculator = () => {
             value={weight} 
             onChange={(e) => setWeight(e.target.value)}
             className="w-full p-3 bg-zinc-800/70 border border-zinc-700 rounded-lg focus:ring-red-500 focus:border-red-500 outline-none transition-all"
+            placeholder="Introdu greutatea"
           />
         </div>
         <div>
@@ -60,6 +78,7 @@ export const CalorieCalculator = () => {
             value={height} 
             onChange={(e) => setHeight(e.target.value)}
             className="w-full p-3 bg-zinc-800/70 border border-zinc-700 rounded-lg focus:ring-red-500 focus:border-red-500 outline-none transition-all"
+            placeholder="Introdu înălțimea"
           />
         </div>
         <div>
@@ -69,6 +88,7 @@ export const CalorieCalculator = () => {
             value={age} 
             onChange={(e) => setAge(e.target.value)}
             className="w-full p-3 bg-zinc-800/70 border border-zinc-700 rounded-lg focus:ring-red-500 focus:border-red-500 outline-none transition-all"
+            placeholder="Introdu vârsta"
           />
         </div>
         <div className="md:col-span-2">
@@ -86,6 +106,12 @@ export const CalorieCalculator = () => {
           </select>
         </div>
       </div>
+      
+      {error && (
+        <div className="mt-6 p-4 bg-red-900/30 border border-red-800 rounded-lg relative z-10">
+          <p className="text-red-300">{error}</p>
+        </div>
+      )}
       
       <button 
         onClick={calculateBMR}
