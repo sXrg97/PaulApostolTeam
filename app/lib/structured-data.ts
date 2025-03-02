@@ -89,10 +89,10 @@ export function generateLocalBusinessSchema() {
     address: {
       // '@type': 'PostalAddress',
       // streetAddress: '123 Main St', // Update with actual address
-      // addressLocality: 'Bucharest', // Update with actual city
-      // addressRegion: 'Bucharest', // Update with actual region
+      addressLocality: 'Timisoara', // Update with actual city
+      addressRegion: 'Timis', // Update with actual region
       // postalCode: '010000', // Update with actual postal code
-      // addressCountry: 'RO',
+      addressCountry: 'RO',
     },
     geo: {
       // '@type': 'GeoCoordinates',
