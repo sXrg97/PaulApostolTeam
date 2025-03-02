@@ -10,6 +10,7 @@
     "generate-sitemap": "node scripts/generate-sitemap.js"
   },
   "dependencies": {
+    "@vercel/analytics": "^1.5.0",
     "@vercel/speed-insights": "^1.2.0",
     "lucide-react": "^0.474.0",
     "next": "15.0.2",
