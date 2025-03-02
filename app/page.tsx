@@ -9,6 +9,31 @@ import Image from "next/image";
 import { Footer } from "./(components)/footer";
 import Link from "next/link";
 import { Dumbbell } from "lucide-react";
+import { Metadata } from "next";
+import { 
+  generateWebPageSchema, 
+  generatePersonalTrainerSchema,
+  addMultipleJSONLD 
+} from "./lib/structured-data";
+
+// Generate metadata for this page
+export function generateMetadata(): Metadata {
+  // Create the WebPage schema
+  const pageSchema = generateWebPageSchema(
+    "Paul Apostol - Antrenor Personal & Specialist în Nutriție",
+    "Ghidul tău personalizat către o viață sănătoasă și activă. Transformă-ți corpul și obiceiurile cu planuri de nutriție și antrenamente adaptate nevoilor tale.",
+    "https://paulapostol.ro",
+    "https://paulapostol.ro/paul_apostol_logo_white.png",
+    "2023-11-05",  // Replace with actual publish date
+    new Date().toISOString()  // Current date as last modified
+  );
+  
+  // Create the PersonalTrainer schema
+  const trainerSchema = generatePersonalTrainerSchema();
+  
+  // Return both schemas
+  return addMultipleJSONLD([pageSchema, trainerSchema]);
+}
 
 export default function Home() {
   return (

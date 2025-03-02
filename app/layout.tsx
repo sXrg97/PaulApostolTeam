@@ -4,6 +4,7 @@ import "./globals.css";
 import { ScrollToTopButton } from "./(components)/ScrollToTopButton";
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import { Analytics } from "@vercel/analytics/react"
+import { generateOrganizationSchema } from "./lib/structured-data";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -15,6 +16,9 @@ const geistMono = localFont({
   variable: "--font-geist-mono",
   weight: "100 900",
 });
+
+// Generate the organization schema
+const organizationSchema = generateOrganizationSchema();
 
 export const metadata: Metadata = {
   title: "Paul Apostol - Antrenor Personal & Specialist în Nutriție",
@@ -49,6 +53,11 @@ export const metadata: Metadata = {
     icon: '/favicon.ico',
     apple: '/apple-touch-icon.png',
     shortcut: '/favicon.ico'
+  },
+  
+  // Add structured data JSON-LD
+  other: {
+    'script:ld+json': JSON.stringify(organizationSchema),
   }
 };
 
