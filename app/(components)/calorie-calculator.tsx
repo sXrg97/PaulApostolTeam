@@ -51,19 +51,22 @@ export const CalorieCalculator = () => {
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 relative z-10">
         <div>
-          <label className="block mb-2 text-zinc-300 font-medium">Gen:</label>
+          <label htmlFor="gender-select" className="block mb-2 text-zinc-300 font-medium">Gen:</label>
           <select 
+            id="gender-select"
             value={gender} 
             onChange={(e) => setGender(e.target.value)}
             className="w-full p-3 bg-zinc-800/70 border border-zinc-700 rounded-lg focus:ring-red-500 focus:border-red-500 outline-none transition-all"
+            aria-label="Selectează genul"
           >
             <option value="female">Feminin</option>
             <option value="male">Masculin</option>
           </select>
         </div>
         <div>
-          <label className="block mb-2 text-zinc-300 font-medium">Greutate (kg):</label>
+          <label htmlFor="weight-input" className="block mb-2 text-zinc-300 font-medium">Greutate (kg):</label>
           <input 
+            id="weight-input"
             type="number" 
             value={weight} 
             onChange={(e) => setWeight(e.target.value)}
@@ -72,8 +75,9 @@ export const CalorieCalculator = () => {
           />
         </div>
         <div>
-          <label className="block mb-2 text-zinc-300 font-medium">Înălțime (cm):</label>
+          <label htmlFor="height-input" className="block mb-2 text-zinc-300 font-medium">Înălțime (cm):</label>
           <input 
+            id="height-input"
             type="number" 
             value={height} 
             onChange={(e) => setHeight(e.target.value)}
@@ -82,8 +86,9 @@ export const CalorieCalculator = () => {
           />
         </div>
         <div>
-          <label className="block mb-2 text-zinc-300 font-medium">Vârstă:</label>
+          <label htmlFor="age-input" className="block mb-2 text-zinc-300 font-medium">Vârstă:</label>
           <input 
+            id="age-input"
             type="number" 
             value={age} 
             onChange={(e) => setAge(e.target.value)}
@@ -92,11 +97,13 @@ export const CalorieCalculator = () => {
           />
         </div>
         <div className="md:col-span-2">
-          <label className="block mb-2 text-zinc-300 font-medium">Nivel de activitate:</label>
+          <label htmlFor="activity-select" className="block mb-2 text-zinc-300 font-medium">Nivel de activitate:</label>
           <select 
+            id="activity-select"
             value={activityLevel} 
             onChange={(e) => setActivityLevel(e.target.value)}
             className="w-full p-3 bg-zinc-800/70 border border-zinc-700 rounded-lg focus:ring-red-500 focus:border-red-500 outline-none transition-all"
+            aria-label="Selectează nivelul de activitate"
           >
             <option value="1.2">Sedentar (0-1 antrenamente/săptămână)</option>
             <option value="1.37">Activitate ușoară (1-3 antrenamente/săptămână)</option>

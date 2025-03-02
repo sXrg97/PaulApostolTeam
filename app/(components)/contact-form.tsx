@@ -32,7 +32,7 @@ export const ContactForm = () => {
       
       <button 
         onClick={openWhatsApp} 
-        className="bg-green-600 hover:bg-green-700 text-white w-full py-3 md:py-4 rounded-lg font-bold flex items-center justify-center gap-3 text-lg md:text-xl transition-all duration-300 hover:shadow-lg hover:shadow-green-900/30 relative z-10 min-h-[56px]"
+        className="bg-green-700 hover:bg-green-800 text-white w-full py-3 md:py-4 rounded-lg font-bold flex items-center justify-center gap-3 text-lg md:text-xl transition-all duration-300 hover:shadow-lg hover:shadow-green-900/30 relative z-10 min-h-[56px]"
       >
         <FaWhatsapp className="text-2xl flex-shrink-0" />
         <span>Conversează pe WhatsApp</span>
