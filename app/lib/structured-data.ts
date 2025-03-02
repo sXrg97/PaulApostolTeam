@@ -12,16 +12,28 @@ type JsonLdValue =
 // Base organization information
 const organizationData = {
   '@context': 'https://schema.org',
-  '@type': 'Organization',
-  name: 'Paul Apostol',
-  url: 'https://paulapostol.ro',
-  logo: 'https://paulapostol.ro/paul_apostol_logo_white.png', // Update with your actual logo path
-  sameAs: [
-    // Add your social profiles here
+  '@type': 'SportsActivityLocation',
+  '@id': 'https://paulapostol.ro/#organization',
+  'name': 'Paul Apostol',
+  'url': 'https://paulapostol.ro',
+  'logo': 'https://paulapostol.ro/paul_apostol_logo_white.png',
+  'image': 'https://paulapostol.ro/paul.png',
+  'description': 'Servicii specializate de antrenament personal și nutriție pentru slăbire, dezvoltare musculară și un stil de viață sănătos.',
+  'sameAs': [
     'https://www.facebook.com/ApostolPaul1996',
     'https://www.instagram.com/paulapostol_pt/',
     'https://www.tiktok.com/@antrenorpaulapostol',
   ],
+  'telephone': '+40757497530',
+  'priceRange': '500-1000 RON',
+  'openingHoursSpecification': [
+    {
+      '@type': 'OpeningHoursSpecification',
+      'dayOfWeek': ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+      'opens': '09:00',
+      'closes': '18:00',
+    }
+  ]
 };
 
 // Generate WebPage structured data
@@ -36,20 +48,34 @@ export function generateWebPageSchema(
   return {
     '@context': 'https://schema.org',
     '@type': 'WebPage',
-    name: title,
-    description: description,
-    url: url,
-    ...(imageUrl && { image: imageUrl }),
-    ...(datePublished && { datePublished }),
-    ...(dateModified && { dateModified }),
-    publisher: {
-      '@type': 'Organization',
-      name: 'Paul Apostol',
-      logo: {
-        '@type': 'ImageObject',
-        url: 'https://paulapostol.ro/paul_apostol_logo_white.png', // Update with your actual logo path
-      },
+    '@id': `${url}#webpage`,
+    'isPartOf': {
+      '@id': 'https://paulapostol.ro/#website'
     },
+    'about': {
+      '@id': 'https://paulapostol.ro/#business'
+    },
+    'name': title,
+    'description': description,
+    'url': url,
+    'inLanguage': 'ro-RO',
+    'mainEntity': {
+      '@type': 'HealthAndBeautyBusiness',
+      '@id': 'https://paulapostol.ro/#business',
+      'name': 'Paul Apostol - Antrenament Personal',
+      'image': 'https://paulapostol.ro/paul.png',
+      'url': 'https://paulapostol.ro',
+    },
+    'primaryImageOfPage': {
+      '@type': 'ImageObject',
+      'url': imageUrl || 'https://paulapostol.ro/paul_apostol_logo_white.png'
+    },
+    ...(datePublished && { 'datePublished': datePublished }),
+    ...(dateModified && { 'dateModified': dateModified }),
+    'potentialAction': {
+      '@type': 'ReadAction',
+      'target': [url]
+    }
   };
 }
 
@@ -95,56 +121,69 @@ export function generateOrganizationSchema() {
 export function generatePersonalTrainerSchema() {
   return {
     '@context': 'https://schema.org',
-    '@type': 'Service',
-    name: 'Servicii de Antrenament Personal și Nutriție',
-    serviceType: ['Antrenament Personal', 'Consultanță Nutriție', 'Program de Slăbire', 'Dezvoltare Musculară'],
-    description: 'Servicii specializate de antrenament personal și nutriție pentru slăbire, dezvoltare musculară și un stil de viață sănătos.',
-    provider: {
-      '@type': 'Person',
-      name: 'Paul Apostol',
-      description: 'Antrenor personal și specialist în nutriție cu experiență din 2019 în ghidarea clienților spre obiectivele lor de fitness.',
-      image: 'https://paulapostol.ro/paul.png', // Update with actual image
-      jobTitle: 'Antrenor Personal & Specialist în Nutriție',
-      url: 'https://paulapostol.ro',
-      sameAs: [
-        // Add your social profiles here if available
-        'https://www.facebook.com/ApostolPaul1996',
-        'https://www.instagram.com/paulapostol_pt/',
-        'https://www.tiktok.com/@antrenorpaulapostol',
-      ],
-      areaServed: 'Romania',
+    '@type': 'LocalBusiness',
+    '@id': 'https://paulapostol.ro/#business',
+    'name': 'Paul Apostol - Antrenor Personal',
+    'image': 'https://paulapostol.ro/paul.png',
+    'url': 'https://paulapostol.ro',
+    'telephone': '+40757497530',
+    'priceRange': '150-1000 RON',
+    'address': {
+      '@type': 'PostalAddress',
+      'addressCountry': 'RO'
     },
-    areaServed: 'Romania',
-    hasOfferCatalog: {
-      '@type': 'OfferCatalog',
-      name: 'Servicii Fitness și Nutriție',
-      itemListElement: [
-        {
-          '@type': 'Offer',
-          itemOffered: {
-            '@type': 'Service',
-            name: 'Program de Slăbire',
-            description: 'Program personalizat pentru pierderea în greutate, combinând antrenamente și un plan nutrițional adaptat.',
-          },
-        },
-        {
-          '@type': 'Offer',
-          itemOffered: {
-            '@type': 'Service',
-            name: 'Dezvoltare Musculară',
-            description: 'Program dedicat dezvoltării masei musculare și îmbunătățirii forței, cu antrenamente specifice și suport nutrițional.',
-          },
-        },
-        {
-          '@type': 'Offer',
-          itemOffered: {
-            '@type': 'Service',
-            name: 'Consultanță Nutrițională',
-            description: 'Servicii de consultanță pentru nutriție echilibrată și sănătoasă, adaptate stilului tău de viață.',
-          },
-        },
-      ],
-    },
+    'sameAs': [
+      'https://www.facebook.com/ApostolPaul1996',
+      'https://www.instagram.com/paulapostol_pt/',
+      'https://www.tiktok.com/@antrenorpaulapostol',
+    ],
+    'makesOffer': [
+      {
+        '@type': 'Offer',
+        'name': 'Antrenament 1 la 1 (Plată lunară)',
+        'description': 'Program de antrenament personalizat în funcție de obiectivele tale (slăbire, creștere musculară, tonifiere)',
+        'price': '1000.00',
+        'priceCurrency': 'RON',
+        'availability': 'https://schema.org/InStock',
+        'url': 'https://paulapostol.ro/#servicii',
+      },
+      {
+        '@type': 'Offer',
+        'name': 'Ședință individuală (1 la 1)',
+        'description': 'Perfect pentru cei care vor să testeze un antrenament personalizat înainte de a alege un abonament',
+        'price': '150.00',
+        'priceCurrency': 'RON',
+        'availability': 'https://schema.org/InStock',
+        'url': 'https://paulapostol.ro/#servicii',
+      },
+      {
+        '@type': 'Offer',
+        'name': 'Antrenament în grup (max. 3 persoane)',
+        'description': 'Îmbină beneficiile antrenamentului personalizat cu energia unui grup mic',
+        'price': '800.00',
+        'priceCurrency': 'RON',
+        'availability': 'https://schema.org/InStock',
+        'url': 'https://paulapostol.ro/#servicii',
+      },
+      {
+        '@type': 'Offer',
+        'name': 'Antrenament 1 la 1 online',
+        'description': 'Plan de antrenament personalizat, adaptat echipamentului disponibil acasă sau la sală',
+        'price': '800.00',
+        'priceCurrency': 'RON',
+        'availability': 'https://schema.org/InStock',
+        'url': 'https://paulapostol.ro/#servicii',
+      },
+      {
+        '@type': 'Offer',
+        'name': 'Online Coaching (plan personalizat + suport)',
+        'description': 'Program personalizat creat în funcție de obiectivele tale și nivelul de experiență',
+        'price': '500.00',
+        'priceCurrency': 'RON',
+        'availability': 'https://schema.org/InStock',
+        'url': 'https://paulapostol.ro/#servicii',
+      }
+    ]
   };
 }
 

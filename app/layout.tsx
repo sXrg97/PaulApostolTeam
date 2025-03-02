@@ -5,6 +5,7 @@ import { ScrollToTopButton } from "./(components)/ScrollToTopButton";
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import { Analytics } from "@vercel/analytics/react"
 import { generateOrganizationSchema } from "./lib/structured-data";
+import Script from "next/script";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -53,11 +54,6 @@ export const metadata: Metadata = {
     icon: '/favicon.ico',
     apple: '/apple-touch-icon.png',
     shortcut: '/favicon.ico'
-  },
-  
-  // Add structured data JSON-LD
-  other: {
-    'script:ld+json': JSON.stringify(organizationSchema),
   }
 };
 
@@ -71,6 +67,11 @@ export default function RootLayout({
       <head>
         <link rel="icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="shortcut icon" href="/favicon.ico" />
+        <Script
+          id="organization-schema"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+        />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased text-white`}

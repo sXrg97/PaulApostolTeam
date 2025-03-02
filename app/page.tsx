@@ -13,31 +13,45 @@ import { Metadata } from "next";
 import { 
   generateWebPageSchema, 
   generatePersonalTrainerSchema,
-  addMultipleJSONLD 
 } from "./lib/structured-data";
+import Script from "next/script";
+
+// Create schema objects
+const pageSchema = generateWebPageSchema(
+  "Paul Apostol - Antrenor Personal & Specialist în Nutriție",
+  "Ghidul tău personalizat către o viață sănătoasă și activă. Transformă-ți corpul și obiceiurile cu planuri de nutriție și antrenamente adaptate nevoilor tale.",
+  "https://paulapostol.ro",
+  "https://paulapostol.ro/paul_apostol_logo_white.png",
+  "2023-11-05",  // Replace with actual publish date
+  new Date().toISOString()  // Current date as last modified
+);
+
+const trainerSchema = generatePersonalTrainerSchema();
 
 // Generate metadata for this page
 export function generateMetadata(): Metadata {
-  // Create the WebPage schema
-  const pageSchema = generateWebPageSchema(
-    "Paul Apostol - Antrenor Personal & Specialist în Nutriție",
-    "Ghidul tău personalizat către o viață sănătoasă și activă. Transformă-ți corpul și obiceiurile cu planuri de nutriție și antrenamente adaptate nevoilor tale.",
-    "https://paulapostol.ro",
-    "https://paulapostol.ro/paul_apostol_logo_white.png",
-    "2023-11-05",  // Replace with actual publish date
-    new Date().toISOString()  // Current date as last modified
-  );
-  
-  // Create the PersonalTrainer schema
-  const trainerSchema = generatePersonalTrainerSchema();
-  
-  // Return both schemas
-  return addMultipleJSONLD([pageSchema, trainerSchema]);
+  return {
+    title: "Paul Apostol - Antrenor Personal & Specialist în Nutriție",
+    description: "Ghidul tău personalizat către o viață sănătoasă și activă. Transformă-ți corpul și obiceiurile cu planuri de nutriție și antrenamente adaptate nevoilor tale.",
+    openGraph: {
+      images: ["/paul_apostol_logo_white.png"],
+    }
+  };
 }
 
 export default function Home() {
   return (
     <>
+      <Script
+        id="webpage-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(pageSchema) }}
+      />
+      <Script
+        id="trainer-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(trainerSchema) }}
+      />
       <Header />
       <Hero />
       <Section id="despre" title="Cine sunt și cu ce te pot ajuta?" bg="#1a1a1a">
