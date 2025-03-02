@@ -22,17 +22,33 @@ export const ScrollToTopButton = () => {
     return () => window.removeEventListener('scroll', toggleVisibility)
   }, [])
   
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    })
+  }
+  
   return (
-    <button 
-      onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}
-      className={`fixed items-center justify-center w-10 h-10 rounded-full bg-red-600/90 hover:bg-red-600 text-white bottom-6 right-6 shadow-md flex z-40 transition-all duration-300 ${
-        isVisible ? 'opacity-90 transform translate-y-0' : 'opacity-0 transform translate-y-10 pointer-events-none'
-      }`}
-      aria-label="Scroll to top"
-    >
-      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
-      </svg>
-    </button>
+    <div className="fixed bottom-4 right-4 z-50" aria-label="Scroll to top button container">
+      <button 
+        onClick={scrollToTop}
+        className={`
+          h-10 w-10 
+          rounded-full 
+          bg-red-600 
+          flex items-center justify-center 
+          text-white 
+          shadow-md 
+          transition-all duration-300 ease-in-out
+          ${isVisible ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform translate-y-10 pointer-events-none'}
+        `}
+        aria-label="Scroll to top"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="h-6 w-6">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
+        </svg>
+      </button>
+    </div>
   )
 } 

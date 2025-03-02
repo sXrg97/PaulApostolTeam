@@ -16,6 +16,9 @@ export const Hero = () => {
           className="object-cover blur-sm scale-105" /* Scale to prevent white edges when blurring */
           quality={90}
           priority
+          sizes="100vw"
+          placeholder="blur"
+          blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJibGFjayIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48L3N2Zz4="
         />
       </div>
 
@@ -46,15 +49,20 @@ export const Hero = () => {
         </div>
       </div>
       
+      {/* Adăugăm un container cu dimensiuni predefinite pentru a preveni CLS */}
       <div className="mt-4 md:mt-0 absolute bottom-0 right-0 md:right-2 lg:right-0 z-20 h-[40vh] sm:h-[50vh] md:h-[85vh] w-full flex justify-center md:justify-center">
-        <Image 
-          width={1920} 
-          height={1080} 
-          src={'/paul.png'} 
-          alt={'Paul Apostol'} 
-          className="h-full w-auto md:absolute md:right-[25%] object-contain"
-          priority
-        />
+        <div className="h-full w-[350px] md:w-[450px] relative">
+          <Image 
+            src={'/paul.png'} 
+            alt={'Paul Apostol'} 
+            fill
+            className="object-contain"
+            priority
+            sizes="(max-width: 768px) 350px, 450px"
+            placeholder="blur"
+            blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJibGFjayIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48L3N2Zz4="
+          />
+        </div>
       </div>
     </div>
   )

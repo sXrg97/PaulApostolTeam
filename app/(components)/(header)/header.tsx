@@ -65,13 +65,16 @@ export const Header = () => {
       }`}>
         <Link href="#home" className='font-bold text-2xl md:text-4xl uppercase italic text-white flex items-center gap-2'>
           Paul Apostol
-          <Image 
-            src="/paul_apostol_logo_white.png" 
-            alt="Paul Apostol Logo" 
-            width={36} 
-            height={36}
-            className="w-auto h-6 md:h-8"
-          />
+          <div className="h-6 md:h-8 w-8 md:w-10 relative">
+            <Image 
+              src="/paul_apostol_logo_white.png" 
+              alt="Paul Apostol Logo" 
+              fill
+              sizes="(max-width: 768px) 32px, 40px"
+              priority
+              className="object-contain"
+            />
+          </div>
         </Link>
         
         {/* Desktop Navigation - using reduced list */}

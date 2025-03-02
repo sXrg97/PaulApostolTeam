@@ -1,21 +1,25 @@
-import type { Metadata } from "next";
-import localFont from "next/font/local";
-import "./globals.css";
-import { ScrollToTopButton } from "./(components)/ScrollToTopButton";
+import './globals.css'
+import type { Metadata } from 'next'
+import localFont from 'next/font/local'
+import { ScrollToTopButton } from "./(components)/ScrollToTopButton"
 import { SpeedInsights } from "@vercel/speed-insights/next"
-import { Analytics } from "@vercel/analytics/react"
-import { generateOrganizationSchema } from "./lib/structured-data";
+import { Analytics } from '@vercel/analytics/react'
+import { generateOrganizationSchema } from "./lib/structured-data"
 import Script from "next/script";
 
+// Declaram fonturile locale cu font-display: swap pentru a preveni CLS
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
   weight: "100 900",
+  display: 'swap',
 });
+
 const geistMono = localFont({
   src: "./fonts/GeistMonoVF.woff",
   variable: "--font-geist-mono",
   weight: "100 900",
+  display: 'swap',
 });
 
 // Generate the organization schema
