@@ -19,6 +19,12 @@ const organizationData = {
   'logo': 'https://paulapostol.ro/paul_apostol_logo_white.png',
   'image': 'https://paulapostol.ro/paul.png',
   'description': 'Servicii specializate de antrenament personal și nutriție pentru slăbire, dezvoltare musculară și un stil de viață sănătos.',
+  'address': {
+    '@type': 'PostalAddress',
+    'addressCountry': 'RO',
+    'addressLocality': 'Timisoara',
+    'addressRegion': 'Timis',
+  },
   'sameAs': [
     'https://www.facebook.com/ApostolPaul1996',
     'https://www.instagram.com/paulapostol_pt/',
