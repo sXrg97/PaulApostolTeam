@@ -50,7 +50,7 @@ export const Hero = () => {
       </div>
       
       {/* Adăugăm un container cu dimensiuni predefinite pentru a preveni CLS */}
-      <div className="mt-4 md:mt-0 absolute bottom-0 right-0 md:right-2 lg:right-0 z-20 h-[40vh] sm:h-[50vh] md:h-[85vh] w-full flex justify-center md:justify-center">
+      <div className="mt-4 md:mt-0 absolute bottom-0 right-0 md:right-2 lg:-right-20 z-20 h-[40vh] sm:h-[50vh] md:h-[85vh] w-full flex justify-center md:justify-center">
         <div className="h-full w-[350px] md:w-[450px] relative">
           <Image 
             src={'/paul.png'} 

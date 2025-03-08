@@ -58,7 +58,7 @@ export const Header = () => {
 
   return (
     <div className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-      scrolled || isMenuOpen ? 'bg-black/50 backdrop-blur-lg shadow-sm' : 'bg-black/0 backdrop-blur-sm'
+      scrolled || isMenuOpen ? 'bg-black/50 backdrop-blur-lg shadow-sm' : 'bg-black/0 backdrop-blur-0'
     }`}>
       <header className={`flex items-center justify-between max-w-7xl mx-auto px-4 transition-all duration-300 ${
         scrolled ? 'h-[60px]' : 'h-[56px] md:h-[72px]'
@@ -69,9 +69,10 @@ export const Header = () => {
             <Image 
               src="/paul_apostol_logo_white.png" 
               alt="Paul Apostol Logo" 
-              fill
               sizes="(max-width: 768px) 32px, 40px"
               priority
+              width={32}
+              height={32}
               className="object-contain"
             />
           </div>

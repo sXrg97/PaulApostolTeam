@@ -31,7 +31,7 @@ const organizationData = {
     'https://www.tiktok.com/@antrenorpaulapostol',
   ],
   'telephone': '+40757497530',
-  'priceRange': '500-1000 RON',
+  'priceRange': '300-1000 RON',
   'openingHoursSpecification': [
     {
       '@type': 'OpeningHoursSpecification',
@@ -185,6 +185,15 @@ export function generatePersonalTrainerSchema() {
         'name': 'Online Coaching (plan personalizat + suport)',
         'description': 'Program personalizat creat în funcție de obiectivele tale și nivelul de experiență',
         'price': '500.00',
+        'priceCurrency': 'RON',
+        'availability': 'https://schema.org/InStock',
+        'url': 'https://paulapostol.ro/#servicii',
+      },
+      {
+        '@type': 'Offer',
+        'name': 'Plan Nutrițional Personalizat',
+        'description': 'Plan nutrițional adaptat nevoilor tale, creat special pentru obiectivele tale de slăbire, masă musculară, menținere sau sănătate',
+        'price': '300.00',
         'priceCurrency': 'RON',
         'availability': 'https://schema.org/InStock',
         'url': 'https://paulapostol.ro/#servicii',

@@ -109,7 +109,7 @@ export const Footer = () => {
           <div className="flex flex-col gap-4">
             <h3 className="text-white font-bold text-lg">Contact</h3>
             <p className="text-zinc-400">
-              Programează o consultație și începe călătoria spre o versiune mai sănătoasă a ta.
+              Programează o consultație și începe călătoria spre cea mai sănătoasă versiune a ta.
             </p>
             <Link 
               href="#contact" 

@@ -182,7 +182,7 @@ export default function Home() {
       </Section>
 
       <Section id="servicii" title="Servicii și Tarife" bg="#050505">
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 gap-8">
           {/* Antrenamente Personalizate */}
           <div className="bg-gradient-to-br from-zinc-900 via-black to-zinc-900 p-8 rounded-lg border border-zinc-800 shadow-xl relative flex flex-col h-full overflow-hidden">
             {/* Decorative elements */}
@@ -329,6 +329,45 @@ export default function Home() {
                 <li className="flex items-start">
                   <span className="text-red-500 mr-2"> <Dumbbell /></span>
                   <span>Suport prin mesaje pentru întrebări și îndrumare</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+          
+          {/* Plan Nutrițional Personalizat */}
+          <div className="bg-gradient-to-br from-zinc-900 via-black to-zinc-900 p-8 rounded-lg border border-zinc-800 shadow-xl relative flex flex-col h-full overflow-hidden">
+            {/* Decorative elements */}
+            <div className="absolute -top-10 -right-10 w-40 h-40 bg-red-600 opacity-5 rounded-full blur-3xl"></div>
+            
+            <div className="flex items-center gap-3 mb-4">
+              <div className="h-8 w-1 bg-red-600 rounded-full"></div>
+              <h3 className="text-2xl font-bold text-white">Plan Nutrițional Personalizat</h3>
+            </div>
+            <p className="text-red-500 font-semibold mb-6">🥗 Nutriție adaptată stilului tău de viață!</p>
+            
+            <div className="relative z-10">
+              <h4 className="text-xl font-bold mb-2">Plan Nutrițional (plată unică)</h4>
+              <p className="text-xl text-red-500 font-bold mb-4">300 lei</p>
+              <ul className="space-y-2">
+                <li className="flex items-start">
+                  <span className="text-red-500 mr-2"> <Dumbbell /></span>
+                  <span>Adaptat nevoilor tale – Plan creat special pentru obiectivele tale (slăbire, masă musculară, menținere, sănătate)</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-red-500 mr-2"> <Dumbbell /></span>
+                  <span>Evaluare detaliată – Analizăm stilul tău de viață, preferințele alimentare și eventualele restricții</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-red-500 mr-2"> <Dumbbell /></span>
+                  <span>Rețete simple & gustoase – Mese echilibrate, ușor de preparat, potrivite programului tău zilnic</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-red-500 mr-2"> <Dumbbell /></span>
+                  <span>Lista de cumpărături – Economisești timp și bani cu o listă clară și organizată</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-red-500 mr-2"> <Dumbbell /></span>
+                  <span>Plată unică – Fără abonamente – O investiție pe termen lung în sănătatea ta!</span>
                 </li>
               </ul>
             </div>
