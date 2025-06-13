@@ -55,8 +55,9 @@ export const Hero = () => {
           <Image 
             src={'/paul.png'} 
             alt={'Paul Apostol'} 
-            fill
-            className="object-contain"
+            width={900}
+            height={900}
+            className="object-contain bottom-0 h-full md:h-auto absolute drop-shadow-xl"
             priority
             sizes="(max-width: 768px) 350px, 450px"
             placeholder="blur"
