@@ -347,7 +347,7 @@ export default function Home() {
             
             <div className="relative z-10">
               <h4 className="text-xl font-bold mb-2">Plan Nutrițional (plată unică)</h4>
-              <p className="text-xl text-red-500 font-bold mb-4">300 lei</p>
+              <p className="text-xl text-red-500 font-bold mb-4">500 lei</p>
               <ul className="space-y-2">
                 <li className="flex items-start">
                   <span className="text-red-500 mr-2"> <Dumbbell /></span>
