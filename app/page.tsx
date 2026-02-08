@@ -14,7 +14,7 @@ import {
   generatePersonalTrainerSchema,
 } from "./lib/structured-data";
 import Script from "next/script";
-import Pricing from "./(components)/Pricing";
+// import Pricing from "./(components)/Pricing";
 
 // Create schema objects
 const pageSchema = generateWebPageSchema(
