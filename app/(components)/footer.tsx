@@ -25,7 +25,7 @@ export const Footer = () => {
     {
       title: "Servicii",
       links: [
-        { id: 'servicii', label: 'Servicii și Tarife' },
+        // { id: 'servicii', label: 'Servicii și Tarife' },
         { id: 'slabire-sanatoasa', label: 'Slăbire sănătoasă' },
         { id: 'beneficii', label: 'Beneficii' },
         { id: 'odihna', label: 'Odihnă' },
