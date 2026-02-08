@@ -193,7 +193,7 @@ export function generatePersonalTrainerSchema() {
         '@type': 'Offer',
         'name': 'Plan Nutrițional Personalizat',
         'description': 'Plan nutrițional adaptat nevoilor tale, creat special pentru obiectivele tale de slăbire, masă musculară, menținere sau sănătate',
-        'price': '300.00',
+        'price': '500.00',
         'priceCurrency': 'RON',
         'availability': 'https://schema.org/InStock',
         'url': 'https://paulapostol.ro/#servicii',
