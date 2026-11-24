@@ -39,6 +39,7 @@ export const Header = () => {
     { id: 'transformari', label: 'Transformări' },
     // { id: 'servicii', label: 'Servicii' },
     { id: 'testimoniale', label: 'Testimoniale' },
+    { id: 'ghid', label: 'Ghid gratuit' },
     { id: 'contact', label: 'Contact' }
   ]
   
@@ -52,6 +53,7 @@ export const Header = () => {
     { id: 'beneficii', label: 'Beneficii' },
     { id: 'odihna', label: 'Odihnă' },
     { id: 'testimoniale', label: 'Testimoniale' },
+    { id: 'ghid', label: 'Ghid gratuit' },
     { id: 'servicii', label: 'Servicii' },
     { id: 'contact', label: 'Contact' }
   ]

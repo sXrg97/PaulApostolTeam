@@ -7,6 +7,7 @@ import { CalorieCalculator } from "./(components)/calorie-calculator";
 import { TransformationGallery } from "./(components)/transformation-gallery";
 import Image from "next/image";
 import { Footer } from "./(components)/footer";
+import { GoogleReviewCta } from "./(components)/google-review-cta";
 import Link from "next/link";
 import { Metadata } from "next";
 import { 
@@ -67,11 +68,12 @@ export default function Home() {
           </div>
           <div className="md:w-1/2">
             <Image 
-              src="/paul_apostol_nameplate.png" 
-              alt="Paul Apostol" 
-              className="rounded-lg w-full aspect-video object-cover object-[25%_60%] shadow-lg"
-              width={500}
-              height={500}
+              src="/paul_apostol_nameplate_new.jpg" 
+              alt="Paul Apostol, antrenor personal, în sala de fitness" 
+              className="rounded-lg w-full max-w-md mx-auto aspect-[2/3] object-cover object-top shadow-lg"
+              width={1024}
+              height={1536}
+              sizes="(max-width: 768px) 100vw, 448px"
             />
           </div>
         </div>
@@ -178,6 +180,43 @@ export default function Home() {
             quote="Cu ajutorul lui Paul, am dat jos 10 kg în prima lună de colaborare! Programul personalizat și sfaturile lui au făcut toată diferența."
             author="Rabia C."
           />
+        </div>
+        <GoogleReviewCta />
+      </Section>
+
+      <Section id="ghid" title="Ghid gratuit: Cum să ajungi la fizicul mult visat" bg="#050505">
+        <div className="flex flex-col md:flex-row items-center gap-8">
+          <div className="md:w-2/3">
+            <p className="text-lg mb-4">
+              Ghidul meu gratuit, în format PDF (8 pagini), strânge într-un singur loc principiile de bază pentru a slăbi sănătos.
+            </p>
+            <ul className="space-y-3 text-lg mb-6">
+              <li>✓ Cine sunt, parcursul meu și experiența din competițiile de fitness</li>
+              <li>✓ Transformări reale ale oamenilor cu care am lucrat</li>
+              <li>✓ Cum îți calculezi necesarul caloric, pas cu pas</li>
+              <li>✓ Beneficiile sportului, odihna și recuperarea</li>
+              <li>✓ Care sunt următorii pași dacă vrei să lucrăm împreună</li>
+            </ul>
+            <a
+              href="/ghid-paul-apostol-slabit.pdf"
+              download
+              className="inline-block bg-red-600 hover:bg-red-700 text-white px-8 py-3 rounded-md text-xl font-bold transition-colors"
+            >
+              Descarcă ghidul (PDF)
+            </a>
+          </div>
+          <div className="md:w-1/3 w-full">
+            <div className="bg-gradient-to-br from-zinc-900 via-black to-zinc-900 p-6 rounded-lg border border-zinc-800 shadow-xl relative overflow-hidden">
+              <div className="absolute -top-8 -right-8 w-24 h-24 bg-red-600 opacity-5 rounded-full blur-2xl"></div>
+              <div className="flex items-center gap-2 mb-3">
+                <div className="h-5 w-1 bg-red-600 rounded-full"></div>
+                <h4 className="text-xl font-bold text-white">Ghid gratuit</h4>
+              </div>
+              <p className="text-zinc-300 relative z-10">
+                Ghidul tău despre cum să ajungi în cea mai bună formă din viața ta, scris de Apostol Paul, antrenor personal și consultant nutriționist.
+              </p>
+            </div>
+          </div>
         </div>
       </Section>
 
