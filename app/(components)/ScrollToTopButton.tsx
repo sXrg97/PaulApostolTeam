@@ -1,54 +1,35 @@
 "use client"
 
-import React, { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
+import { ArrowUp } from 'lucide-react'
 
+// Ascuns pe mobil, unde există bara fixă cu WhatsApp și ghid.
 export const ScrollToTopButton = () => {
   const [isVisible, setIsVisible] = useState(false)
-  
-  // Show button when page is scrolled down
+
   useEffect(() => {
-    const toggleVisibility = () => {
-      // Show if scrolled more than 500px
-      if (window.scrollY > 500) {
-        setIsVisible(true)
-      } else {
-        setIsVisible(false)
-      }
-    }
-    
-    window.addEventListener('scroll', toggleVisibility)
-    
-    // Clean up event listener
+    const toggleVisibility = () => setIsVisible(window.scrollY > 600)
+    toggleVisibility()
+    window.addEventListener('scroll', toggleVisibility, { passive: true })
     return () => window.removeEventListener('scroll', toggleVisibility)
   }, [])
-  
+
   const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    })
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' })
   }
-  
+
   return (
-    <div className="fixed bottom-4 right-4 z-50" aria-label="Scroll to top button container">
-      <button 
-        onClick={scrollToTop}
-        className={`
-          h-10 w-10 
-          rounded-full 
-          bg-red-600 
-          flex items-center justify-center 
-          text-white 
-          shadow-md 
-          transition-all duration-300 ease-in-out
-          ${isVisible ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform translate-y-10 pointer-events-none'}
-        `}
-        aria-label="Scroll to top"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="h-6 w-6">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
-        </svg>
-      </button>
-    </div>
+    <button
+      type="button"
+      onClick={scrollToTop}
+      aria-label="Înapoi sus"
+      tabIndex={isVisible ? undefined : -1}
+      className={`fixed bottom-6 right-6 z-40 hidden h-12 w-12 items-center justify-center rounded-full bg-red-600 text-white shadow-lg shadow-black/40 transition-all duration-300 hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-red-500 md:flex ${
+        isVisible ? 'translate-y-0 opacity-100' : 'pointer-events-none translate-y-6 opacity-0'
+      }`}
+    >
+      <ArrowUp className="h-5 w-5" aria-hidden="true" />
+    </button>
   )
-} 
+}

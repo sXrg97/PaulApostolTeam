@@ -1,246 +1,370 @@
+import Image from "next/image";
+import { ArrowRight, Check, ChevronDown, FileDown, FileText, Moon, Activity } from "lucide-react";
+import { FaWhatsapp } from "react-icons/fa";
 import { Header } from "./(components)/(header)/header";
 import { Hero } from "./(components)/(header)/hero";
 import { Section } from "./(components)/section";
+import { StatsStrip } from "./(components)/stats-strip";
 import { Testimonial } from "./(components)/testimonial";
 import { ContactForm } from "./(components)/contact-form";
 import { CalorieCalculator } from "./(components)/calorie-calculator";
 import { TransformationGallery } from "./(components)/transformation-gallery";
-import Image from "next/image";
 import { Footer } from "./(components)/footer";
 import { GoogleReviewCta } from "./(components)/google-review-cta";
-import Link from "next/link";
-import { Metadata } from "next";
-import { 
-  generateWebPageSchema, 
-  generatePersonalTrainerSchema,
-} from "./lib/structured-data";
-import Script from "next/script";
-// import Pricing from "./(components)/Pricing";
+import { Faq } from "./(components)/faq";
+import { JsonLd } from "./(components)/json-ld";
+import { RevealObserver } from "./(components)/reveal-observer";
+import { StickyCta } from "./(components)/sticky-cta";
+import { buildHomeGraph } from "./lib/structured-data";
+import { EXTERNAL_LINK_PROPS, GUIDE_PDF, PORTRAIT_IMAGE, WHATSAPP_URL } from "./lib/site";
+import { bodyText, btnArrow, btnPrimary, btnSecondary, card, cardHover, eyebrow } from "./lib/ui";
 
-// Create schema objects
-const pageSchema = generateWebPageSchema(
-  "Paul Apostol - Antrenor Personal & Specialist în Nutriție",
-  "Ghidul tău personalizat către o viață sănătoasă și activă. Transformă-ți corpul și obiceiurile cu planuri de nutriție și antrenamente adaptate nevoilor tale.",
-  "https://paulapostol.ro",
-  "https://paulapostol.ro/paul_apostol_logo_white.png",
-  "2023-11-05",  // Replace with actual publish date
-  new Date().toISOString()  // Current date as last modified
+const experience = [
+  "Antrenor personal din 2019",
+  "Am lucrat cu oameni cu obiective și tipuri de corp foarte diferite",
+  "Am văzut foarte multe tipuri de genetică",
+  "Participare la Cupa României în competiții de fitness",
+];
+
+const basics = [
+  {
+    title: "Necesarul caloric",
+    text: "Cantitatea totală de calorii necesare zilnic pentru menținerea funcțiilor vitale și susținerea activității fizice.",
+  },
+  {
+    title: "Deficitul caloric",
+    text: "Reducerea aportului caloric sub necesarul zilnic pentru a determina corpul să utilizeze rezervele de grăsime.",
+  },
+  {
+    title: "Calitatea alimentelor",
+    text: "Alegerea alimentelor nutritive și echilibrate pentru a asigura sănătatea și energia necesară în procesul de slăbire.",
+  },
+];
+
+const sportBenefits = [
+  "Întărește sistemul cardiovascular",
+  "Crește forța musculară",
+  "Îmbunătățește flexibilitatea",
+  "Eliberează endorfine, reducând stresul și anxietatea",
+  "Îmbunătățește starea de spirit și calitatea somnului",
+  "Promovează disciplina, spiritul de echipă și perseverența",
+];
+
+const restItems = [
+  { title: "Esențiale pentru sănătate", text: "Odihna și recuperarea sunt la fel de importante ca și antrenamentele." },
+  {
+    title: "Refacerea mușchilor",
+    text: "După exerciții intense, corpul are nevoie de timp pentru a-și reface mușchii și pentru a preveni accidentările.",
+  },
+  { title: "Somn adecvat", text: "Adulții ar trebui să doarmă între 7 și 9 ore pe noapte pentru a funcționa bine." },
+  {
+    title: "Concentrare mentală",
+    text: "Somnul joacă un rol vital în funcția cognitivă, inclusiv în concentrare, atenție și luarea deciziilor.",
+  },
+];
+
+const guideContents = [
+  "Cine sunt, parcursul meu și experiența din competițiile de fitness",
+  "Transformări reale ale oamenilor cu care am lucrat",
+  "Cum îți calculezi necesarul caloric, pas cu pas",
+  "Beneficiile sportului, odihna și recuperarea",
+  "Care sunt următorii pași dacă vrei să lucrăm împreună",
+];
+
+const withoutList = [
+  "Te înfometezi",
+  "Mănânci alimente care nu îți plac",
+  "Faci cardio încontinuu și să nu vezi niciun rezultat",
+  "Simți că stai la același nivel",
+];
+
+const CheckItem = ({ children }: { children: React.ReactNode }) => (
+  <li className="flex gap-3">
+    <span className="mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-red-600/15 text-red-500">
+      <Check className="h-3.5 w-3.5" strokeWidth={3} aria-hidden="true" />
+    </span>
+    <span>{children}</span>
+  </li>
 );
 
-const trainerSchema = generatePersonalTrainerSchema();
-
-// Generate metadata for this page
-export function generateMetadata(): Metadata {
-  return {
-    title: "Paul Apostol - Antrenor Personal & Specialist în Nutriție",
-    description: "Ghidul tău personalizat către o viață sănătoasă și activă. Transformă-ți corpul și obiceiurile cu planuri de nutriție și antrenamente adaptate nevoilor tale.",
-    openGraph: {
-      images: ["/paul_apostol_logo_white.png"],
-    }
-  };
-}
+const detailsSummary =
+  "flex cursor-pointer list-none items-center justify-between gap-4 p-6 md:p-8 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500";
 
 export default function Home() {
   return (
     <>
-      <Script
-        id="webpage-schema"
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(pageSchema) }}
-      />
-      <Script
-        id="trainer-schema"
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(trainerSchema) }}
-      />
+      <JsonLd data={buildHomeGraph()} />
       <Header />
-      <Hero />
-      <Section id="despre" title="Cine sunt și cu ce te pot ajuta?" bg="#1a1a1a">
-        <div className="flex flex-col md:flex-row items-center gap-8">
-          
-          <div className="md:w-1/2">
-            <p className="text-lg mb-4">
-              Mă numesc Apostol Paul și, din 2019, îndrum femei și bărbați în procesul de slăbire, dezvoltare musculară și adoptare a unui stil de viață sănătos, indiferent dacă aleg să se antreneze în sala de fitness sau nu.
-            </p>
-            <p className="text-lg mb-4">
-              Am descoperit fitnessul în 2014, când nemulțumirea față de propriul corp m-a determinat să fac o schimbare. Primele luni de antrenament au fost o provocare, dar progresul vizibil și transformarea prin care am trecut m-au motivat să continui. Cu timpul, sportul a devenit mai mult decât o simplă activitate – o parte esențială a vieții mele. Odată cu experiența acumulată, tot mai mulți prieteni mi-au cerut sfaturi pentru a-și îmbunătăți forma fizică, iar în acel moment am realizat că acesta este drumul pe care vreau să merg.
-            </p>
-          </div>
-          <div className="md:w-1/2">
-            <Image 
-              src="/paul_apostol_nameplate_new.jpg" 
-              alt="Paul Apostol, antrenor personal, în sala de fitness" 
-              className="rounded-lg w-full max-w-md mx-auto aspect-[2/3] object-cover object-top shadow-lg"
-              width={1024}
-              height={1536}
-              sizes="(max-width: 768px) 100vw, 448px"
-            />
-          </div>
-        </div>
-      </Section>
+      <main>
+        <Hero />
+        <StatsStrip />
 
-      <Section id="experienta" title="Experiența mea" bg="#050505">
-        <div className="flex flex-col md:flex-row gap-8">
-          <div className="md:w-1/2">
-            <ul className="space-y-4 text-lg">
-              <li>✓ 5 ani de experiență ca antrenor personal</li>
-              <li>✓ Am ajutat foarte multe persoane să își îndeplinească obiectivul</li>
-              <li>✓ Am văzut foarte multe tipuri de genetic</li>
-              <li>✓ Participare la Cupa României în competiții de Fitness</li>
-            </ul>
-            <p className="mt-4 text-lg">
-              Am trecut prin toate procesele: perioada de masă musculară, procesul de slăbit, și perioada de revenire după concurs. Am înțeles toate stările unei persoane care dorește să slăbească.
-            </p>
-            <p className="mt-4 text-lg font-bold">
-              Cel mai important aspect este că AM TRECUT ȘI EU PRIN TOATE.
-            </p>
-          </div>
-          
-          <div className="md:w-1/2 flex justify-center md:justify-end">
-            <div className="w-full max-w-md">
-              <Image 
-                src="/paul_apostol_cupa_romaniei.jpg" 
-                alt="Paul Apostol la Cupa României" 
-                width={500}
-                height={500}
-                className="rounded-lg shadow-lg aspect-square object-cover object-top w-full"
+        {/* DESPRE + EXPERIENȚĂ */}
+        <Section id="despre" eyebrow="Despre mine" title="Cine sunt și cu ce te pot ajuta?">
+          <div className="grid items-center gap-12 md:grid-cols-2 lg:gap-20">
+            <div data-reveal className="relative mx-auto w-full max-w-md md:order-1">
+              <div className="absolute -left-3 -top-3 h-24 w-24 border-l-4 border-t-4 border-red-600" aria-hidden="true" />
+              <Image
+                src={PORTRAIT_IMAGE}
+                alt="Paul Apostol, antrenor personal, în sala de fitness din Timișoara"
+                width={1200}
+                height={1800}
+                sizes="(min-width: 768px) 448px, calc(100vw - 40px)"
+                className="relative aspect-[2/3] w-full rounded-2xl object-cover object-top"
               />
             </div>
-          </div>
-        </div>
-        
-        <div className="mt-10 text-center sm:text-left">
-          <Link href={'#contact'} className="bg-red-600 hover:bg-red-700 text-white px-8 py-3 rounded-md text-xl font-bold">
-            Programează o consultație
-          </Link>
-        </div>
-      </Section>
-
-      <Section id="transformari" title="Transformări" bg="#1a1a1a">
-        <TransformationGallery />
-      </Section>
-
-      <Section id="slabire-sanatoasa" title="Tot ce trebuie să știi pentru a slăbi sănătos" bg="#050505">
-        <div className="grid md:grid-cols-3 gap-8">
-          <div className="bg-gradient-to-br from-zinc-900 via-black to-zinc-900 p-6 rounded-lg border border-zinc-800 shadow-lg relative overflow-hidden">
-            <div className="absolute -top-8 -right-8 w-24 h-24 bg-red-600 opacity-5 rounded-full blur-2xl"></div>
-            <div className="flex items-center gap-2 mb-4">
-              <div className="h-5 w-1 bg-red-600 rounded-full"></div>
-              <h3 className="text-xl font-bold text-white">1. Necesarul caloric</h3>
-            </div>
-            <p className="text-zinc-300 relative z-10">Cantitatea totală de calorii necesare zilnic pentru menținerea funcțiilor vitale și susținerea activității fizice.</p>
-          </div>
-          <div className="bg-gradient-to-br from-zinc-900 via-black to-zinc-900 p-6 rounded-lg border border-zinc-800 shadow-lg relative overflow-hidden">
-            <div className="absolute -top-8 -right-8 w-24 h-24 bg-red-600 opacity-5 rounded-full blur-2xl"></div>
-            <div className="flex items-center gap-2 mb-4">
-              <div className="h-5 w-1 bg-red-600 rounded-full"></div>
-              <h3 className="text-xl font-bold text-white">2. Deficitul caloric</h3>
-            </div>
-            <p className="text-zinc-300 relative z-10">Reducerea aportului caloric sub necesarul zilnic pentru a determina corpul să utilizeze rezervele de grăsime.</p>
-          </div>
-          <div className="bg-gradient-to-br from-zinc-900 via-black to-zinc-900 p-6 rounded-lg border border-zinc-800 shadow-lg relative overflow-hidden">
-            <div className="absolute -top-8 -right-8 w-24 h-24 bg-red-600 opacity-5 rounded-full blur-2xl"></div>
-            <div className="flex items-center gap-2 mb-4">
-              <div className="h-5 w-1 bg-red-600 rounded-full"></div>
-              <h3 className="text-xl font-bold text-white">3. Calitatea alimentelor</h3>
-            </div>
-            <p className="text-zinc-300 relative z-10">Alegerea alimentelor nutritive și echilibrate pentru a asigura sănătatea și energia necesară în procesul de slăbire.</p>
-          </div>
-        </div>
-        <CalorieCalculator />
-      </Section>
-
-      <Section id="beneficii" title="Beneficiile Sportului" bg="#1a1a1a">
-        <ul className="space-y-4 text-lg">
-          <li>✓ Întărește sistemul cardiovascular</li>
-          <li>✓ Crește forța musculară</li>
-          <li>✓ Îmbunătățește flexibilitatea</li>
-          <li>✓ Eliberează endorfine, reducând stresul și anxietatea</li>
-          <li>✓ Îmbunătățește starea de spirit și calitatea somnului</li>
-          <li>✓ Promovează disciplina, spiritul de echipă și perseverența</li>
-        </ul>
-      </Section>
-
-      <Section id="odihna" title="Odihna și Recuperarea" bg="#050505">
-        <ul className="space-y-4 text-lg">
-          <li>✓ Esențiale pentru sănătate: Odihna și recuperarea sunt la fel de importante ca și antrenamentele.</li>
-          <li>✓ Refacerea mușchilor: După exerciții intense, corpul are nevoie de timp pentru a-și reface mușchii și pentru a preveni accidentările.</li>
-          <li>✓ Somn adecvat: Adulții ar trebui să doarmă între 7 și 9 ore pe noapte pentru a funcționa bine.</li>
-          <li>✓ Concentrare mentală: Somnul joacă un rol vital în funcția cognitivă, inclusiv în concentrare, atenție și luarea deciziilor.</li>
-        </ul>
-      </Section>
-
-      <Section id="testimoniale" title="Testimoniale" bg="#1a1a1a">
-        <div className="grid md:grid-cols-2 gap-8">
-          <Testimonial
-            quote="Paul m-a ajutat să dau jos 40 de kg! Am ajuns de la 120 la 80 de kg. Sunt extrem de mulțumit de rezultate și de abordarea lui profesionistă."
-            author="Alexandru M."
-          />
-          <Testimonial
-            quote="Cu ajutorul lui Paul, am dat jos 10 kg în prima lună de colaborare! Programul personalizat și sfaturile lui au făcut toată diferența."
-            author="Rabia C."
-          />
-        </div>
-        <GoogleReviewCta />
-      </Section>
-
-      <Section id="ghid" title="Ghid gratuit: Cum să ajungi la fizicul mult visat" bg="#050505">
-        <div className="flex flex-col md:flex-row items-center gap-8">
-          <div className="md:w-2/3">
-            <p className="text-lg mb-4">
-              Ghidul meu gratuit, în format PDF (8 pagini), strânge într-un singur loc principiile de bază pentru a slăbi sănătos.
-            </p>
-            <ul className="space-y-3 text-lg mb-6">
-              <li>✓ Cine sunt, parcursul meu și experiența din competițiile de fitness</li>
-              <li>✓ Transformări reale ale oamenilor cu care am lucrat</li>
-              <li>✓ Cum îți calculezi necesarul caloric, pas cu pas</li>
-              <li>✓ Beneficiile sportului, odihna și recuperarea</li>
-              <li>✓ Care sunt următorii pași dacă vrei să lucrăm împreună</li>
-            </ul>
-            <a
-              href="/ghid-paul-apostol-slabit.pdf"
-              download
-              className="inline-block bg-red-600 hover:bg-red-700 text-white px-8 py-3 rounded-md text-xl font-bold transition-colors"
-            >
-              Descarcă ghidul (PDF)
-            </a>
-          </div>
-          <div className="md:w-1/3 w-full">
-            <div className="bg-gradient-to-br from-zinc-900 via-black to-zinc-900 p-6 rounded-lg border border-zinc-800 shadow-xl relative overflow-hidden">
-              <div className="absolute -top-8 -right-8 w-24 h-24 bg-red-600 opacity-5 rounded-full blur-2xl"></div>
-              <div className="flex items-center gap-2 mb-3">
-                <div className="h-5 w-1 bg-red-600 rounded-full"></div>
-                <h4 className="text-xl font-bold text-white">Ghid gratuit</h4>
-              </div>
-              <p className="text-zinc-300 relative z-10">
-                Ghidul tău despre cum să ajungi în cea mai bună formă din viața ta, scris de Apostol Paul, antrenor personal și consultant nutriționist.
+            <div data-reveal className={`${bodyText} space-y-5 md:order-2`}>
+              <p className="text-xl leading-relaxed text-white md:text-2xl">
+                Sunt Paul Apostol, antrenor personal în Timișoara. Din 2019 lucrez cu femei și bărbați care vor să slăbească,
+                să pună masă musculară sau să aibă un stil de viață mai sănătos, la sală sau fără sală.
+              </p>
+              <p>
+                Am descoperit fitnessul în 2014, când nemulțumirea față de propriul corp m-a determinat să fac o schimbare.
+                Primele luni de antrenament au fost o provocare, dar progresul vizibil și transformarea prin care am trecut
+                m-au motivat să continui. Cu timpul, sportul a devenit mai mult decât o simplă activitate, o parte esențială a
+                vieții mele. Odată cu experiența acumulată, tot mai mulți prieteni mi-au cerut sfaturi pentru a-și îmbunătăți
+                forma fizică, iar în acel moment am realizat că acesta este drumul pe care vreau să merg.
               </p>
             </div>
           </div>
-        </div>
-      </Section>
 
-      {/* <Pricing /> */}
+          <div className="mt-20 grid items-center gap-12 md:mt-28 md:grid-cols-2 lg:gap-20">
+            <div data-reveal>
+              <span id="experienta" className="block scroll-mt-24" aria-hidden="true" />
+              <p className={eyebrow}>Din 2019</p>
+              <h3 className="mt-3 font-display text-3xl font-bold uppercase leading-none tracking-tight text-white md:text-5xl">
+                Experiența mea
+              </h3>
+              <ul className={`${bodyText} mt-8 space-y-4`}>
+                {experience.map((item) => (
+                  <CheckItem key={item}>{item}</CheckItem>
+                ))}
+              </ul>
+              <p className={`${bodyText} mt-6`}>
+                Am trecut prin toate procesele: perioada de masă musculară, procesul de slăbit și perioada de revenire după
+                concurs. Am înțeles toate stările unei persoane care dorește să slăbească.
+              </p>
+              <p className="mt-6 border-l-4 border-red-600 pl-4 font-display text-2xl font-bold uppercase italic leading-tight text-white md:text-3xl">
+                Cel mai important aspect este că am trecut și eu prin toate.
+              </p>
+              <a href="#contact" className={`${btnPrimary} mt-10`}>
+                Programează o consultație
+                <ArrowRight className={btnArrow} aria-hidden="true" />
+              </a>
+            </div>
+            <figure data-reveal className="relative mx-auto w-full max-w-md">
+              <div className="absolute -bottom-3 -right-3 h-24 w-24 border-b-4 border-r-4 border-red-600" aria-hidden="true" />
+              <Image
+                src="/paul-apostol-cupa-romaniei-fitness.jpg"
+                alt="Paul Apostol pe scenă la Cupa României, competiție de fitness"
+                width={1000}
+                height={1333}
+                sizes="(min-width: 768px) 448px, calc(100vw - 40px)"
+                className="relative aspect-[3/4] w-full rounded-2xl object-cover object-top"
+              />
+              <figcaption className="mt-3 text-sm text-zinc-500">Cupa României, competiție de fitness</figcaption>
+            </figure>
+          </div>
+        </Section>
 
-      <Section id="contact" title="Care sunt următorii pași?" bg="#1a1a1a">
-        <p className="text-lg mb-6">
-          Principiile de mai sus sunt doar o mică parte din ceea ce aplic și eu cu toți cei care aleg să colaboreze cu mine.
-        </p>
-        <p className="text-lg mb-6">
-          Dacă îți dorești și tu să slăbești sau să pui masă musculară, <span className="uppercase text-red-500 font-bold">fără</span> să:
-        </p>
-        <ul className="list-disc list-inside mb-6 text-lg">
-          <li>Te înfometezi</li>
-          <li>Mănânci alimente care nu îți plac</li>
-          <li>Faci cardio încontinuu și să nu vezi nici un rezultat</li>
-          <li>Simți că stai la același nivel</li>
-        </ul>
-        <p className="text-lg mb-6">
-          Te invit să-mi trimiți un mesaj pe WhatsApp, unde vom discuta despre situația ta și vom concepe un plan personalizat împreună.
-        </p>
-        <ContactForm />
-      </Section>
+        {/* TRANSFORMĂRI */}
+        <Section
+          id="transformari"
+          eyebrow="Rezultate reale"
+          title="Transformări"
+          tone="raised"
+          intro="Oameni reali cu care am lucrat. Fotografiile sunt publicate cu acordul lor."
+        >
+          <TransformationGallery />
+          <p className="mt-10 max-w-3xl text-sm leading-relaxed text-zinc-400">
+            Rezultatele diferă de la o persoană la alta și depind de consecvență, alimentație și starea de sănătate.
+          </p>
+          <div data-reveal className="mt-10 flex flex-col gap-3 sm:flex-row">
+            <a href={WHATSAPP_URL} {...EXTERNAL_LINK_PROPS} className={btnPrimary}>
+              <FaWhatsapp className="h-5 w-5 shrink-0" aria-hidden="true" />
+              Vreau să încep și eu
+            </a>
+          </div>
+        </Section>
+
+        {/* TESTIMONIALE */}
+        <Section id="testimoniale" eyebrow="Ce spun clienții" title="Testimoniale">
+          <div className="grid gap-6 md:grid-cols-2 md:gap-8">
+            <Testimonial
+              quote="Paul m-a ajutat să dau jos 40 de kg! Am ajuns de la 120 la 80 de kg. Sunt extrem de mulțumit de rezultate și de abordarea lui profesionistă."
+              author="Alexandru M."
+            />
+            <Testimonial
+              quote="Cu ajutorul lui Paul, am dat jos 10 kg în prima lună de colaborare! Programul personalizat și sfaturile lui au făcut toată diferența."
+              author="Rabia C."
+              delay={100}
+            />
+          </div>
+          <GoogleReviewCta />
+        </Section>
+
+        {/* GHID GRATUIT */}
+        <Section id="ghid" eyebrow="Ghid gratuit" title="Cum să ajungi la fizicul mult visat" tone="raised">
+          <div className="grid items-start gap-12 md:grid-cols-[1.4fr_1fr] lg:gap-20">
+            <div data-reveal>
+              <p className={bodyText}>
+                Ghidul meu gratuit, în format PDF (8 pagini), strânge într-un singur loc principiile de bază pentru a slăbi
+                sănătos.
+              </p>
+              <ul className={`${bodyText} mt-8 space-y-4`}>
+                {guideContents.map((item) => (
+                  <CheckItem key={item}>{item}</CheckItem>
+                ))}
+              </ul>
+              <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center">
+                <a href={GUIDE_PDF} download className={btnPrimary}>
+                  <FileDown className="h-5 w-5 shrink-0" aria-hidden="true" />
+                  Descarcă ghidul (PDF)
+                </a>
+                <span className="text-sm text-zinc-400">Fără înregistrare, fără email.</span>
+              </div>
+            </div>
+
+            <a
+              href={GUIDE_PDF}
+              download
+              data-reveal
+              aria-label="Descarcă ghidul gratuit în format PDF"
+              className="group relative mx-auto block w-full max-w-sm"
+            >
+              <div className="absolute inset-0 translate-x-3 translate-y-3 rounded-2xl border border-red-600/40" aria-hidden="true" />
+              <div className="relative flex min-h-[22rem] flex-col justify-between gap-8 overflow-hidden md:aspect-[3/4] md:min-h-0 rounded-2xl border border-white/10 bg-gradient-to-br from-zinc-900 to-black p-8 transition duration-300 motion-safe:md:group-hover:-translate-y-1 md:group-hover:border-red-600/50">
+                <div className="absolute inset-y-0 left-0 w-2 bg-red-600" aria-hidden="true" />
+                <div className="flex items-center justify-between">
+                  <span className={eyebrow}>Ghid gratuit</span>
+                  <FileText className="h-6 w-6 text-zinc-500" aria-hidden="true" />
+                </div>
+                <div>
+                  <h3 className="font-display text-4xl font-extrabold uppercase italic leading-[0.9] text-white md:text-5xl">
+                    Cum să ajungi la fizicul mult visat
+                  </h3>
+                  <p className="mt-5 text-sm leading-relaxed text-zinc-400">
+                    Ghidul tău despre cum să ajungi în cea mai bună formă din viața ta, scris de Paul Apostol, antrenor personal.
+                  </p>
+                </div>
+                <div className="flex items-center justify-between border-t border-white/10 pt-5 text-sm text-zinc-300">
+                  <span>PDF · 8 pagini</span>
+                  <span className="font-display text-lg font-bold uppercase italic text-white">Paul Apostol</span>
+                </div>
+              </div>
+            </a>
+          </div>
+        </Section>
+
+        {/* SLĂBIRE SĂNĂTOASĂ (include Beneficii și Odihnă) */}
+        <Section id="slabire-sanatoasa" eyebrow="Principii de bază" title="Bazele unei slăbiri sănătoase">
+          <ol className="grid gap-6 md:grid-cols-3">
+            {basics.map((item, index) => (
+              <li
+                key={item.title}
+                data-reveal
+                style={{ "--reveal-delay": `${index * 90}ms` } as React.CSSProperties}
+                className={`${card} ${cardHover}`}
+              >
+                <span className="font-display text-5xl font-extrabold italic leading-none text-red-600">0{index + 1}</span>
+                <h3 className="mt-5 font-display text-2xl font-bold uppercase tracking-wide text-white md:text-3xl">
+                  {item.title}
+                </h3>
+                <p className="mt-3 leading-relaxed text-zinc-300">{item.text}</p>
+              </li>
+            ))}
+          </ol>
+
+          <div data-reveal className="mt-10">
+            <CalorieCalculator />
+          </div>
+
+          <div className="mt-10 grid items-start gap-6 md:grid-cols-2">
+            <details id="beneficii" data-reveal className={`${card} group scroll-mt-24 !p-0`}>
+              <summary className={detailsSummary}>
+                <span className="flex items-center gap-4">
+                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-red-600/15 text-red-500">
+                    <Activity className="h-5 w-5" aria-hidden="true" />
+                  </span>
+                  <h3 className="font-display text-2xl font-bold uppercase tracking-wide text-white md:text-3xl">
+                    Beneficiile sportului
+                  </h3>
+                </span>
+                <ChevronDown className="h-5 w-5 shrink-0 text-zinc-400 transition-transform duration-300 group-open:rotate-180" aria-hidden="true" />
+              </summary>
+              <ul className="space-y-3 px-6 pb-8 text-zinc-300 md:px-8">
+                {sportBenefits.map((item) => (
+                  <CheckItem key={item}>{item}</CheckItem>
+                ))}
+              </ul>
+            </details>
+
+            <details id="odihna" data-reveal className={`${card} group scroll-mt-24 !p-0`}>
+              <summary className={detailsSummary}>
+                <span className="flex items-center gap-4">
+                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-red-600/15 text-red-500">
+                    <Moon className="h-5 w-5" aria-hidden="true" />
+                  </span>
+                  <h3 className="font-display text-2xl font-bold uppercase tracking-wide text-white md:text-3xl">
+                    Odihna și recuperarea
+                  </h3>
+                </span>
+                <ChevronDown className="h-5 w-5 shrink-0 text-zinc-400 transition-transform duration-300 group-open:rotate-180" aria-hidden="true" />
+              </summary>
+              <ul className="space-y-4 px-6 pb-8 text-zinc-300 md:px-8">
+                {restItems.map((item) => (
+                  <CheckItem key={item.title}>
+                    <strong className="font-semibold text-white">{item.title}:</strong> {item.text}
+                  </CheckItem>
+                ))}
+              </ul>
+            </details>
+          </div>
+        </Section>
+
+        {/* ÎNTREBĂRI FRECVENTE */}
+        <Section id="intrebari" eyebrow="Întrebări frecvente" title="Ai întrebări?" tone="raised">
+          <Faq />
+        </Section>
+
+        {/* CONTACT */}
+        <Section id="contact" eyebrow="Contact" title="Care sunt următorii pași?">
+          <div className="grid items-start gap-12 md:grid-cols-2 lg:gap-20">
+            <div data-reveal className={`${bodyText} space-y-6`}>
+              <p>
+                Principiile de pe această pagină sunt doar o mică parte din ceea ce aplic și eu cu toți cei care aleg să
+                colaboreze cu mine.
+              </p>
+              <p>
+                Dacă îți dorești și tu să slăbești sau să pui masă musculară,{" "}
+                <span className="font-bold uppercase text-red-500">fără</span> să:
+              </p>
+              <ul className="space-y-3">
+                {withoutList.map((item) => (
+                  <li key={item} className="flex gap-3">
+                    <span className="mt-[0.7em] h-0.5 w-4 shrink-0 bg-red-600" aria-hidden="true" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+              <p>
+                Te invit să-mi trimiți un mesaj pe WhatsApp, unde vom discuta despre situația ta și vom concepe un plan
+                personalizat împreună.
+              </p>
+              <a href={GUIDE_PDF} download className={btnSecondary}>
+                <FileDown className="h-4 w-4 shrink-0" aria-hidden="true" />
+                Descarcă mai întâi ghidul
+              </a>
+            </div>
+            <div data-reveal style={{ "--reveal-delay": "120ms" } as React.CSSProperties}>
+              <ContactForm />
+            </div>
+          </div>
+        </Section>
+      </main>
       <Footer />
+      <StickyCta />
+      <RevealObserver />
     </>
   );
 }

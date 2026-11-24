@@ -1,6 +1,12 @@
 'use client'
 
 import { useState } from 'react';
+import { Calculator, Info } from 'lucide-react';
+import { btnPrimary } from '../lib/ui';
+
+const fieldClass =
+  'w-full min-h-12 rounded-xl border border-white/10 bg-black/40 px-4 text-base text-white placeholder:text-zinc-500 outline-none transition-colors focus:border-red-500 focus:ring-2 focus:ring-red-500/30';
+const labelClass = 'mb-2 block text-sm font-medium text-zinc-300';
 
 export const CalorieCalculator = () => {
   const [gender, setGender] = useState('female');
@@ -11,18 +17,16 @@ export const CalorieCalculator = () => {
   const [bmr, setBmr] = useState(0);
   const [error, setError] = useState('');
 
-  const calculateBMR = () => {
-    // Reset previous results and errors
+  const calculateBMR = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     setBmr(0);
     setError('');
-    
-    // Validate all required fields
+
     if (!weight || !height || !age) {
       setError('Te rugăm să completezi toate câmpurile pentru a calcula necesarul caloric.');
       return;
     }
-    
-    // Validate input values
+
     if (parseFloat(weight) <= 0 || parseFloat(height) <= 0 || parseFloat(age) <= 0) {
       setError('Te rugăm să introduci valori pozitive pentru greutate, înălțime și vârstă.');
       return;
@@ -39,102 +43,109 @@ export const CalorieCalculator = () => {
   };
 
   return (
-    <div className="mt-10 bg-gradient-to-br from-zinc-900 via-black to-zinc-900 p-8 rounded-xl border border-zinc-800 shadow-xl relative overflow-hidden">
-      {/* Decorative elements */}
-      <div className="absolute -top-20 -right-20 w-64 h-64 bg-red-600 opacity-5 rounded-full blur-3xl"></div>
-      <div className="absolute -bottom-20 -left-20 w-64 h-64 bg-red-800 opacity-5 rounded-full blur-3xl"></div>
-      
-      <div className="flex items-center gap-3 mb-6">
-        <div className="h-8 w-1 bg-red-600 rounded-full"></div>
-        <h3 className="text-2xl font-bold text-white">Calculator Necesar Caloric</h3>
-      </div>
-      
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 relative z-10">
+    <div id="calculator" className="scroll-mt-24 rounded-2xl border border-white/10 bg-zinc-900/60 p-6 md:p-10">
+      <div className="flex items-center gap-4">
+        <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-red-600/15 text-red-500">
+          <Calculator className="h-6 w-6" aria-hidden="true" />
+        </span>
         <div>
-          <label htmlFor="gender-select" className="block mb-2 text-zinc-300 font-medium">Gen:</label>
-          <select 
-            id="gender-select"
-            value={gender} 
-            onChange={(e) => setGender(e.target.value)}
-            className="w-full p-3 bg-zinc-800/70 border border-zinc-700 rounded-lg focus:ring-red-500 focus:border-red-500 outline-none transition-all"
-            aria-label="Selectează genul"
-          >
-            <option value="female">Feminin</option>
-            <option value="male">Masculin</option>
-          </select>
-        </div>
-        <div>
-          <label htmlFor="weight-input" className="block mb-2 text-zinc-300 font-medium">Greutate (kg):</label>
-          <input 
-            id="weight-input"
-            type="number" 
-            value={weight} 
-            onChange={(e) => setWeight(e.target.value)}
-            className="w-full p-3 bg-zinc-800/70 border border-zinc-700 rounded-lg focus:ring-red-500 focus:border-red-500 outline-none transition-all"
-            placeholder="Introdu greutatea"
-          />
-        </div>
-        <div>
-          <label htmlFor="height-input" className="block mb-2 text-zinc-300 font-medium">Înălțime (cm):</label>
-          <input 
-            id="height-input"
-            type="number" 
-            value={height} 
-            onChange={(e) => setHeight(e.target.value)}
-            className="w-full p-3 bg-zinc-800/70 border border-zinc-700 rounded-lg focus:ring-red-500 focus:border-red-500 outline-none transition-all"
-            placeholder="Introdu înălțimea"
-          />
-        </div>
-        <div>
-          <label htmlFor="age-input" className="block mb-2 text-zinc-300 font-medium">Vârstă:</label>
-          <input 
-            id="age-input"
-            type="number" 
-            value={age} 
-            onChange={(e) => setAge(e.target.value)}
-            className="w-full p-3 bg-zinc-800/70 border border-zinc-700 rounded-lg focus:ring-red-500 focus:border-red-500 outline-none transition-all"
-            placeholder="Introdu vârsta"
-          />
-        </div>
-        <div className="md:col-span-2">
-          <label htmlFor="activity-select" className="block mb-2 text-zinc-300 font-medium">Nivel de activitate:</label>
-          <select 
-            id="activity-select"
-            value={activityLevel} 
-            onChange={(e) => setActivityLevel(e.target.value)}
-            className="w-full p-3 bg-zinc-800/70 border border-zinc-700 rounded-lg focus:ring-red-500 focus:border-red-500 outline-none transition-all"
-            aria-label="Selectează nivelul de activitate"
-          >
-            <option value="1.2">Sedentar (0-1 antrenamente/săptămână)</option>
-            <option value="1.37">Activitate ușoară (1-3 antrenamente/săptămână)</option>
-            <option value="1.55">Activitate moderată (3-5 antrenamente/săptămână)</option>
-            <option value="1.72">Activitate foarte activă (6-7 antrenamente/săptămână)</option>
-            <option value="1.9">Activitate extremă (sportivi de performanță)</option>
-          </select>
+          <h3 className="font-display text-3xl font-bold uppercase tracking-wide text-white md:text-4xl">
+            Calculator necesar caloric
+          </h3>
+          <p className="text-sm text-zinc-400">Calculul se face doar în browserul tău, nu salvăm nimic.</p>
         </div>
       </div>
-      
-      {error && (
-        <div className="mt-6 p-4 bg-red-900/30 border border-red-800 rounded-lg relative z-10">
-          <p className="text-red-300">{error}</p>
+
+      <form onSubmit={calculateBMR} noValidate className="mt-8">
+        <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
+          <div>
+            <label htmlFor="gender-select" className={labelClass}>Gen</label>
+            <select
+              id="gender-select"
+              value={gender}
+              onChange={(e) => setGender(e.target.value)}
+              className={fieldClass}
+            >
+              <option value="female">Feminin</option>
+              <option value="male">Masculin</option>
+            </select>
+          </div>
+          <div>
+            <label htmlFor="weight-input" className={labelClass}>Greutate (kg)</label>
+            <input
+              id="weight-input"
+              type="number"
+              inputMode="decimal"
+              min="1"
+              value={weight}
+              onChange={(e) => setWeight(e.target.value)}
+              className={fieldClass}
+              placeholder="ex. 70"
+            />
+          </div>
+          <div>
+            <label htmlFor="height-input" className={labelClass}>Înălțime (cm)</label>
+            <input
+              id="height-input"
+              type="number"
+              inputMode="decimal"
+              min="1"
+              value={height}
+              onChange={(e) => setHeight(e.target.value)}
+              className={fieldClass}
+              placeholder="ex. 170"
+            />
+          </div>
+          <div>
+            <label htmlFor="age-input" className={labelClass}>Vârstă (ani)</label>
+            <input
+              id="age-input"
+              type="number"
+              inputMode="numeric"
+              min="1"
+              value={age}
+              onChange={(e) => setAge(e.target.value)}
+              className={fieldClass}
+              placeholder="ex. 30"
+            />
+          </div>
+          <div className="md:col-span-2">
+            <label htmlFor="activity-select" className={labelClass}>Nivel de activitate</label>
+            <select
+              id="activity-select"
+              value={activityLevel}
+              onChange={(e) => setActivityLevel(e.target.value)}
+              className={fieldClass}
+            >
+              <option value="1.2">Sedentar (0-1 antrenamente/săptămână)</option>
+              <option value="1.37">Activitate ușoară (1-3 antrenamente/săptămână)</option>
+              <option value="1.55">Activitate moderată (3-5 antrenamente/săptămână)</option>
+              <option value="1.72">Activitate foarte activă (6-7 antrenamente/săptămână)</option>
+              <option value="1.9">Activitate extremă (sportivi de performanță)</option>
+            </select>
+          </div>
         </div>
-      )}
-      
-      <button 
-        onClick={calculateBMR}
-        className="mt-8 bg-gradient-to-r from-red-700 to-red-600 hover:from-red-800 hover:to-red-700 text-white px-8 py-3 rounded-lg font-bold text-lg w-full md:w-auto transition-all duration-300 hover:shadow-lg hover:shadow-red-700/30 relative z-10"
-      >
-        Calculează
-      </button>
-      
-      {bmr > 0 && (
-        <div className="mt-6 p-4 bg-zinc-800/50 border border-zinc-700 rounded-lg relative z-10">
-          <p className="text-lg text-white">
-            Necesarul tău caloric zilnic este aproximativ: 
-            <span className="ml-2 font-bold text-red-500 text-xl">{bmr} calorii</span>
-          </p>
+
+        <div className="mt-8 flex flex-col gap-5 md:flex-row md:items-center">
+          <button type="submit" className={`${btnPrimary} w-full md:w-auto`}>
+            Calculează
+          </button>
+          <div aria-live="polite" className="min-h-[1.5rem]">
+            {error && <p className="text-sm text-red-300">{error}</p>}
+            {bmr > 0 && (
+              <p className="text-base text-zinc-200 md:text-lg">
+                Necesarul tău caloric zilnic este aproximativ{' '}
+                <span className="font-display text-3xl font-bold text-red-500">{bmr} calorii</span>
+              </p>
+            )}
+          </div>
         </div>
-      )}
+      </form>
+
+      <p className="mt-8 flex gap-3 border-t border-white/10 pt-6 text-sm text-zinc-400">
+        <Info className="mt-0.5 h-4 w-4 shrink-0 text-red-500" aria-hidden="true" />
+        Rezultatul este o estimare. Dacă ai afecțiuni medicale, consultă medicul înainte de a începe.
+      </p>
     </div>
   );
 };

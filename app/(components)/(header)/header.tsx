@@ -1,136 +1,136 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { Menu, X } from 'lucide-react'
-import Link from 'next/link'
 import Image from 'next/image'
+import Link from 'next/link'
+import { FaWhatsapp } from 'react-icons/fa'
+import { EXTERNAL_LINK_PROPS, WHATSAPP_URL } from '../../lib/site'
+import { btnPrimary } from '../../lib/ui'
+
+// Linkurile au forma "/#id" ca să funcționeze și de pe alte pagini (ex. politica de confidențialitate).
+const navItems = [
+  { id: 'despre', label: 'Despre' },
+  { id: 'transformari', label: 'Transformări' },
+  { id: 'testimoniale', label: 'Testimoniale' },
+  { id: 'ghid', label: 'Ghid gratuit' },
+  { id: 'intrebari', label: 'Întrebări' },
+  { id: 'contact', label: 'Contact' },
+]
 
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
 
-  // Add scroll event listener to detect when user scrolls
   useEffect(() => {
-    const handleScroll = () => {
-      const isScrolled = window.scrollY > 20
-      if (isScrolled !== scrolled) {
-        setScrolled(isScrolled)
-      }
-    }
+    const handleScroll = () => setScrolled(window.scrollY > 20)
+    handleScroll()
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
-    window.addEventListener('scroll', handleScroll)
-    
+  useEffect(() => {
+    if (!isMenuOpen) return
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setIsMenuOpen(false)
+    }
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    window.addEventListener('keydown', onKey)
     return () => {
-      window.removeEventListener('scroll', handleScroll)
+      document.body.style.overflow = previousOverflow
+      window.removeEventListener('keydown', onKey)
     }
-  }, [scrolled])
+  }, [isMenuOpen])
 
-  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
-    e.preventDefault()
-    const element = document.getElementById(id)
-    element?.scrollIntoView({ behavior: 'smooth' })
-    setIsMenuOpen(false)
-  }
-
-  // List of navigation items for desktop (reduced)
-  const desktopNavItems = [
-    { id: 'home', label: 'Acasă' },
-    { id: 'despre', label: 'Despre' },
-    { id: 'transformari', label: 'Transformări' },
-    // { id: 'servicii', label: 'Servicii' },
-    { id: 'testimoniale', label: 'Testimoniale' },
-    { id: 'ghid', label: 'Ghid gratuit' },
-    { id: 'contact', label: 'Contact' }
-  ]
-  
-  // Full list of navigation items for mobile
-  const mobileNavItems = [
-    { id: 'home', label: 'Acasă' },
-    { id: 'despre', label: 'Despre' },
-    { id: 'experienta', label: 'Experiență' },
-    { id: 'transformari', label: 'Transformări' },
-    { id: 'slabire-sanatoasa', label: 'Slăbire sănătoasă' },
-    { id: 'beneficii', label: 'Beneficii' },
-    { id: 'odihna', label: 'Odihnă' },
-    { id: 'testimoniale', label: 'Testimoniale' },
-    { id: 'ghid', label: 'Ghid gratuit' },
-    { id: 'servicii', label: 'Servicii' },
-    { id: 'contact', label: 'Contact' }
-  ]
+  const closeMenu = () => setIsMenuOpen(false)
+  const solid = scrolled || isMenuOpen
 
   return (
-    <div className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-      scrolled || isMenuOpen ? 'bg-black/50 backdrop-blur-lg shadow-sm' : 'bg-black/0 backdrop-blur-0'
-    }`}>
-      <header className={`flex items-center justify-between max-w-7xl mx-auto px-4 transition-all duration-300 ${
-        scrolled ? 'h-[60px]' : 'h-[56px] md:h-[72px]'
-      }`}>
-        <Link href="#home" className='font-bold text-2xl md:text-4xl uppercase italic text-white flex items-center gap-2'>
+    <div
+      className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${
+        solid ? 'border-b border-white/10 bg-black/80 backdrop-blur-md' : 'border-b border-transparent bg-transparent'
+      }`}
+    >
+      <header className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 md:h-20">
+        <Link
+          href="/#home"
+          onClick={closeMenu}
+          className="flex items-center gap-2 font-display text-[1.7rem] font-extrabold uppercase italic leading-none tracking-wide text-white md:text-4xl"
+          aria-label="Paul Apostol, mergi la începutul paginii"
+        >
           Paul Apostol
-          <div className="h-6 md:h-8 w-8 md:w-10 relative">
-            <Image 
-              src="/paul_apostol_logo_white.png" 
-              alt="Paul Apostol Logo" 
-              sizes="(max-width: 768px) 32px, 40px"
-              priority
-              width={32}
-              height={32}
-              className="object-contain"
-            />
-          </div>
+          <Image
+            src="/paul_apostol_logo_white.png"
+            alt=""
+            width={40}
+            height={40}
+            sizes="40px"
+            priority
+            className="h-8 w-8 object-contain md:h-10 md:w-10"
+          />
         </Link>
-        
-        {/* Desktop Navigation - using reduced list */}
-        <nav className="hidden md:block">
-          <ul className='flex flex-wrap space-x-6 uppercase text-white text-sm'>
-            {desktopNavItems.map(item => (
+
+        <nav aria-label="Navigare principală" className="ml-8 hidden lg:block">
+          <ul className="flex items-center gap-6 text-[13px] font-medium uppercase tracking-[0.1em] text-zinc-200">
+            {navItems.map((item) => (
               <li key={item.id}>
-                <a 
-                  href={`#${item.id}`} 
-                  onClick={(e) => handleClick(e, item.id)} 
-                  className="hover:text-red-500 transition-colors whitespace-nowrap"
+                <Link
+                  href={`/#${item.id}`}
+                  className="relative whitespace-nowrap py-2 transition-colors after:absolute after:inset-x-0 after:bottom-0 after:h-0.5 after:origin-left after:scale-x-0 after:bg-red-600 after:transition-transform after:duration-300 hover:text-white hover:after:scale-x-100"
                 >
                   {item.label}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
         </nav>
-        
-        {/* Mobile menu toggle button */}
-        <button 
-          className="md:hidden text-white focus:outline-none focus:ring-2 focus:ring-red-500 rounded-md p-1"
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-          aria-expanded={isMenuOpen}
+
+        <a
+          href={WHATSAPP_URL}
+          {...EXTERNAL_LINK_PROPS}
+          className="hidden min-h-10 items-center gap-2 rounded-full bg-red-600 px-5 text-xs font-semibold uppercase tracking-[0.1em] text-white transition-colors hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-red-500 xl:inline-flex"
         >
-          {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          <FaWhatsapp className="h-4 w-4" aria-hidden="true" />
+          Scrie-mi
+        </a>
+
+        <button
+          type="button"
+          className="flex h-11 w-11 items-center justify-center rounded-full text-white transition-colors hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-red-500 lg:hidden"
+          onClick={() => setIsMenuOpen((open) => !open)}
+          aria-label={isMenuOpen ? 'Închide meniul' : 'Deschide meniul'}
+          aria-expanded={isMenuOpen}
+          aria-controls="meniu-mobil"
+        >
+          {isMenuOpen ? <X size={26} aria-hidden="true" /> : <Menu size={26} aria-hidden="true" />}
         </button>
       </header>
-      
-      {/* Mobile Navigation Menu with improved glassmorphism - using full list */}
+
       {isMenuOpen && (
-        <div className="md:hidden bg-black/50 backdrop-blur-lg shadow-inner border-t border-zinc-800/30 animate-fadeIn h-[calc(100vh-60px)] overflow-y-auto">
-          <nav className="flex flex-col py-4 max-w-7xl mx-auto px-4">
-            {mobileNavItems.map(item => (
-              <a 
+        <div
+          id="meniu-mobil"
+          className="animate-fadeIn h-[calc(100svh-4rem)] overflow-y-auto border-t border-white/10 bg-black/95 lg:hidden"
+        >
+          <nav aria-label="Navigare mobil" className="mx-auto flex max-w-6xl flex-col px-5 py-6">
+            {[{ id: 'home', label: 'Acasă' }, ...navItems].map((item) => (
+              <Link
                 key={item.id}
-                href={`#${item.id}`} 
-                onClick={(e) => handleClick(e, item.id)} 
-                className="py-2.5 border-b border-zinc-800/30 text-white hover:text-red-500 transition-colors text-base font-medium flex items-center"
+                href={`/#${item.id}`}
+                onClick={closeMenu}
+                className="flex items-center justify-between border-b border-white/10 py-4 font-display text-3xl font-bold uppercase tracking-wide text-white transition-colors hover:text-red-500"
               >
-                <div className="h-4 w-0.5 bg-red-600 rounded-full mr-2.5"></div>
                 {item.label}
-              </a>
+              </Link>
             ))}
-            
-            {/* CTA Button at bottom of mobile menu */}
-            <a 
-              href="#contact" 
-              onClick={(e) => handleClick(e, 'contact')} 
-              className="mt-4 bg-red-600 hover:bg-red-700 text-white py-2.5 px-5 rounded-md text-center font-medium transition-colors text-base"
+            <a
+              href={WHATSAPP_URL}
+              {...EXTERNAL_LINK_PROPS}
+              onClick={closeMenu}
+              className={`${btnPrimary} mt-8 w-full`}
             >
-              Începe acum
+              <FaWhatsapp className="h-5 w-5" aria-hidden="true" />
+              Scrie-mi pe WhatsApp
             </a>
           </nav>
         </div>

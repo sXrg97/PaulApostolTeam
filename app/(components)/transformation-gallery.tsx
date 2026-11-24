@@ -1,105 +1,91 @@
-"use client"
+"use client";
 
 import Image from "next/image";
+import { ChevronDown, MoveHorizontal } from "lucide-react";
 import { useState } from "react";
+import { BeforeAfterSlider } from "./before-after-slider";
+import { cardHover } from "../lib/ui";
+import { TRANSFORMATIONS, resultLabel, transformationAlt } from "../lib/transformations";
+
+const CARD_SIZES = "(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw";
 
 export const TransformationGallery = () => {
-    const transformations = [
-      { name: 'Paul', before: 120, after: 80, image: '/paul_slim.jpg', description: 'Paul a început acest proces la 120 kg, hotărât să își schimbe viața fără antrenamente, doar prin nutriție și reguli simple. I-am creat un plan alimentar echilibrat, bazat pe deficit caloric, ore de masă regulate, hidratare optimă și mai multă mișcare în viața de zi cu zi. Primele săptămâni au fost dificile, dar progresul l-a motivat să continue. Cu disciplină și consecvență, a ajuns la 80 kg, transformându-și complet stilul de viață. Fără antrenamente, doar prin alegeri corecte și perseverență, Paul a demonstrat că schimbarea este posibilă oricând.' },
-      { name: 'Rabia', loss: 10, image: '/rabia_slim.jpg', description: 'Rabia a început antrenamentele 1 la 1 cu obiectivul clar de a slăbi și de a-și îmbunătăți compoziția corporală. În doar două luni, printr-un program bine structurat de antrenament și un plan alimentar echilibrat, a reușit să scadă 10 kg și să își tonifieze corpul.' },
-      { name: 'Lavinia', before: 75, after: 55, image: '/lavinia_slim.jpg', description: 'Prin muncă și perseverență, Lavinia a reușit să ajungă de la 75 kg la 55 kg, atingând astfel obiectivul dorit. Această schimbare nu este doar despre kilogramele pierdute, ci despre un stil de viață mai sănătos și mai echilibrat.' },
-      { name: 'Eduard', before: 85, after: 65, image: '/eduard_slim.jpg', description: 'Prin consecvență și determinare, Eduard a reușit să slăbească 20 kg și să își îmbunătățească stilul de viață. Progresul lui demonstrează că, alături de un plan bine structurat și susținere, orice obiectiv poate fi atins.' },
-      { name: 'Daiana', loss: 15, image: '/daiana_slim.jpg', description: 'Cu perseverență și un program adaptat nevoilor ei, Daiana a reușit să dea jos 15 kg după sarcină și să revină în formă. Această transformare arată că, indiferent de provocări, cu un plan bine structurat și susținere, orice obiectiv poate fi atins.' },
-      // Add more transformations as needed
-    ];
-  
-    // State to track expanded/collapsed state for each card
-    const [expandedStates, setExpandedStates] = useState<boolean[]>(transformations.map(() => false));
-  
-    // Toggle expanded state for a specific card
-    const toggleExpand = (index: number) => {
-      const newStates = [...expandedStates];
-      newStates[index] = !newStates[index];
-      setExpandedStates(newStates);
-    };
-  
-    return (
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-        {transformations.map((transformation, index) => (
-          <div 
-            key={index} 
-            className="group bg-gradient-to-br from-zinc-900 via-black to-zinc-900 rounded-xl overflow-hidden hover:shadow-xl border border-zinc-800 transition-all duration-300 hover:border-red-900 flex flex-col h-full"
+  const [expanded, setExpanded] = useState<Record<number, boolean>>({});
+
+  return (
+    <ul className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
+      {TRANSFORMATIONS.map((t, index) => {
+        const isOpen = Boolean(expanded[index]);
+        const descriptionId = `transformare-${t.name.toLowerCase()}-descriere`;
+        const alt = transformationAlt(t);
+
+        return (
+          <li
+            key={t.name}
+            data-reveal
+            style={{ "--reveal-delay": `${(index % 3) * 90}ms` } as React.CSSProperties}
+            className={`flex flex-col overflow-hidden rounded-2xl border border-white/10 bg-zinc-900/60 ${cardHover}`}
           >
-            <div className="relative overflow-hidden">
-              <Image 
-                src={transformation.image || "/placeholder.svg"} 
-                alt={`Transformare ${transformation.name}`} 
-                className="w-full aspect-square object-cover transition-transform duration-500 group-hover:scale-105"
-                height={500}
-                width={500}
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-0 group-hover:opacity-60 transition-opacity duration-300"></div>
+            <div className="relative flex aspect-[4/5] items-center justify-center bg-black">
+              {t.split ? (
+                <BeforeAfterSlider
+                  src={t.image}
+                  alt={alt}
+                  name={t.name}
+                  width={t.width}
+                  height={t.height}
+                  className="h-full"
+                />
+              ) : (
+                <Image
+                  src={t.image}
+                  alt={alt}
+                  width={t.width}
+                  height={t.height}
+                  sizes={CARD_SIZES}
+                  className="h-full w-full object-contain"
+                />
+              )}
             </div>
-            
-            <div className="p-4 sm:p-6 flex flex-col flex-grow">
-              <div className="flex items-center gap-2 mb-3">
-                <div className="h-5 w-1 bg-red-600 rounded-full"></div>
-                <h3 className="text-xl sm:text-2xl font-bold text-white">{transformation.name}</h3>
+
+            <div className="flex flex-grow flex-col p-6">
+              <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-2">
+                <h3 className="font-display text-3xl font-bold uppercase tracking-wide text-white">{t.name}</h3>
+                <span className="rounded-full border border-red-500/40 bg-red-600/15 px-3 py-1 text-sm font-semibold text-red-300">
+                  {resultLabel(t)}
+                </span>
               </div>
-              
-              <div className="mb-4 inline-block bg-red-900/30 text-red-400 font-semibold px-3 py-1 rounded-full text-sm">
-                {transformation.before && transformation.after ? (
-                  <span>De la {transformation.before} kg la {transformation.after} kg</span>
-                ) : (
-                  <span>-{transformation.loss} kg în prima lună</span>
-                )}
-              </div>
-              
-              <div className="text-zinc-300 text-sm flex-grow">
-                {expandedStates[index] ? (
-                  // Expanded view - show full text
-                  <p>{transformation.description}</p>
-                ) : (
-                  // Collapsed view - show preview with gradient fade that matches the card's background pattern
-                  <div className="relative">
-                    <p className="line-clamp-3">{transformation.description}</p>
-                    <div 
-                      className="absolute bottom-0 left-0 right-0 h-10"
-                      style={{
-                        background: 'linear-gradient(to top, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0) 100%)'
-                      }}
-                    ></div>
-                  </div>
-                )}
-                
-                {/* Toggle button */}
-                <button 
-                  onClick={(e) => {
-                    e.preventDefault();
-                    toggleExpand(index);
-                  }}
-                  className="mt-3 text-red-400 hover:text-red-300 text-sm font-medium focus:outline-none transition-colors flex items-center gap-1"
-                >
-                  {expandedStates[index] ? (
-                    <>
-                      Arată mai puțin
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
-                      </svg>
-                    </>
-                  ) : (
-                    <>
-                      Arată mai mult
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                      </svg>
-                    </>
-                  )}
-                </button>
-              </div>
+              {t.split && (
+                <p className="mt-2 inline-flex items-center gap-1.5 text-xs font-medium uppercase tracking-wider text-zinc-400">
+                  <MoveHorizontal className="h-3.5 w-3.5" aria-hidden="true" />
+                  Trage de linie pentru a compara
+                </p>
+              )}
+
+              <p
+                id={descriptionId}
+                className={`mt-3 text-sm leading-relaxed text-zinc-300 md:text-base ${isOpen ? "" : "line-clamp-3"}`}
+              >
+                {t.description}
+              </p>
+
+              <button
+                type="button"
+                aria-expanded={isOpen}
+                aria-controls={descriptionId}
+                onClick={() => setExpanded((prev) => ({ ...prev, [index]: !prev[index] }))}
+                className="mt-4 inline-flex w-fit items-center gap-1.5 rounded text-sm font-semibold text-red-400 transition-colors hover:text-red-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-red-500"
+              >
+                {isOpen ? "Arată mai puțin" : "Arată mai mult"}
+                <ChevronDown
+                  className={`h-4 w-4 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
+                  aria-hidden="true"
+                />
+              </button>
             </div>
-          </div>
-        ))}
-      </div>
-    );
-  };
+          </li>
+        );
+      })}
+    </ul>
+  );
+};

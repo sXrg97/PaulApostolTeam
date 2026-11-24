@@ -1,135 +1,106 @@
-'use client'
-
+import Image from 'next/image'
 import Link from 'next/link'
 import { FaFacebook, FaInstagram, FaTiktok, FaWhatsapp } from 'react-icons/fa'
+import { EXTERNAL_LINK_PROPS, SOCIAL_LINKS, WHATSAPP_URL } from '../lib/site'
+
+const socialIcons = {
+  Facebook: FaFacebook,
+  Instagram: FaInstagram,
+  TikTok: FaTiktok,
+} as const
+
+const footerLinks = [
+  {
+    title: 'Navigare',
+    links: [
+      { href: '/#home', label: 'Acasă' },
+      { href: '/#despre', label: 'Despre' },
+      { href: '/#transformari', label: 'Transformări' },
+      { href: '/#testimoniale', label: 'Testimoniale' },
+      { href: '/#contact', label: 'Contact' },
+    ],
+  },
+  {
+    title: 'Resurse',
+    links: [
+      { href: '/#ghid', label: 'Ghid gratuit' },
+      { href: '/#slabire-sanatoasa', label: 'Slăbire sănătoasă' },
+      { href: '/#calculator', label: 'Calculator caloric' },
+      { href: '/#intrebari', label: 'Întrebări frecvente' },
+    ],
+  },
+]
+
+const iconLinkClass =
+  'flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/5 text-zinc-200 transition-colors hover:border-red-600 hover:bg-red-600 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500'
 
 export const Footer = () => {
-  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
-    e.preventDefault()
-    const element = document.getElementById(id)
-    element?.scrollIntoView({ behavior: 'smooth' })
-  }
-
-  // Footer navigation groups
-  const footerLinks = [
-    {
-      title: "Navigare",
-      links: [
-        { id: 'home', label: 'Acasă' },
-        { id: 'despre', label: 'Despre' },
-        { id: 'experienta', label: 'Experiență' },
-        { id: 'transformari', label: 'Transformări' },
-        { id: 'contact', label: 'Contact' },
-      ]
-    },
-    {
-      title: "Servicii",
-      links: [
-        // { id: 'servicii', label: 'Servicii și Tarife' },
-        { id: 'slabire-sanatoasa', label: 'Slăbire sănătoasă' },
-        { id: 'beneficii', label: 'Beneficii' },
-        { id: 'odihna', label: 'Odihnă' },
-        { id: 'testimoniale', label: 'Testimoniale' },
-      ]
-    }
-  ]
-
   return (
-    <footer className="bg-gradient-to-b from-black to-zinc-900 text-white py-16 relative overflow-hidden">
-      {/* Background decorative elements */}
-      <div className="absolute inset-0 opacity-5 bg-[url('/noise.svg')] pointer-events-none"></div>
-      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-red-800 via-red-600 to-transparent"></div>
-      
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
-          {/* Column 1: Brand & Info */}
+    <footer className="border-t border-white/10 bg-black pb-28 pt-16 text-white md:pb-12">
+      <div className="mx-auto max-w-6xl px-5">
+        <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-4">
           <div className="flex flex-col gap-4">
-            <span className="font-bold text-2xl md:text-3xl uppercase italic text-red-500">
+            <Link
+              href="/#home"
+              className="flex w-fit items-center gap-2 font-display text-3xl font-extrabold uppercase italic leading-none tracking-wide text-white"
+            >
               Paul Apostol
-            </span>
-            <p className="text-zinc-400">Antrenor Personal & Specialist în Nutriție</p>
-            
-            <div className="flex gap-4 mt-2">
-              <Link 
-                href="https://facebook.com/ApostolPaul1996" 
-                target="_blank"
-                className="bg-zinc-800 hover:bg-red-700 p-2.5 rounded-full transition-all duration-300"
-                aria-label="Facebook"
-              >
-                <FaFacebook size={20} />
-              </Link>
-              <Link 
-                href="https://instagram.com/paulapostol_pt" 
-                target="_blank"
-                className="bg-zinc-800 hover:bg-red-700 p-2.5 rounded-full transition-all duration-300"
-                aria-label="Instagram"
-              >
-                <FaInstagram size={20} />
-              </Link>
-              <Link 
-                href="https://www.tiktok.com/@antrenorpaulapostol" 
-                target="_blank"
-                className="bg-zinc-800 hover:bg-red-700 p-2.5 rounded-full transition-all duration-300"
-                aria-label="Instagram"
-              >
-                <FaTiktok size={20} />
-              </Link>
-              <Link 
-                href="https://wa.me/40757497530" 
-                target="_blank"
-                className="bg-zinc-800 hover:bg-red-700 p-2.5 rounded-full transition-all duration-300"
-                aria-label="WhatsApp"
-              >
-                <FaWhatsapp size={20} />
-              </Link>
-            </div>
-          </div>
-          
-          {/* Column 2 & 3: Navigation Links */}
-          {footerLinks.map((group, index) => (
-            <div key={index} className="flex flex-col gap-4">
-              <h3 className="text-white font-bold text-lg">{group.title}</h3>
-              <ul className="space-y-2">
-                {group.links.map((link) => (
-                  <li key={link.id}>
-                    <a 
-                      href={`#${link.id}`} 
-                      onClick={(e) => handleClick(e, link.id)}
-                      className="text-zinc-400 hover:text-red-500 transition-colors"
-                    >
-                      {link.label}
+              <Image src="/paul_apostol_logo_white.png" alt="" width={32} height={32} sizes="32px" className="h-8 w-8 object-contain" />
+            </Link>
+            <p className="text-zinc-400">Antrenor personal în Timișoara. Antrenamente 1&nbsp;la&nbsp;1 și plan alimentar.</p>
+            <ul className="mt-2 flex gap-3">
+              {SOCIAL_LINKS.map((social) => {
+                const Icon = socialIcons[social.name]
+                return (
+                  <li key={social.name}>
+                    <a href={social.href} {...EXTERNAL_LINK_PROPS} aria-label={social.name} className={iconLinkClass}>
+                      <Icon size={18} aria-hidden="true" />
                     </a>
+                  </li>
+                )
+              })}
+              <li>
+                <a href={WHATSAPP_URL} {...EXTERNAL_LINK_PROPS} aria-label="WhatsApp" className={iconLinkClass}>
+                  <FaWhatsapp size={18} aria-hidden="true" />
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          {footerLinks.map((group) => (
+            <nav key={group.title} aria-label={group.title} className="flex flex-col gap-4">
+              <h2 className="text-xs font-semibold uppercase tracking-[0.2em] text-red-500">{group.title}</h2>
+              <ul className="space-y-3">
+                {group.links.map((link) => (
+                  <li key={link.href}>
+                    <Link href={link.href} className="text-zinc-300 transition-colors hover:text-white">
+                      {link.label}
+                    </Link>
                   </li>
                 ))}
               </ul>
-            </div>
+            </nav>
           ))}
-          
-          {/* Column 4: Contact */}
+
           <div className="flex flex-col gap-4">
-            <h3 className="text-white font-bold text-lg">Contact</h3>
-            <p className="text-zinc-400">
-              Programează o consultație și începe călătoria spre cea mai sănătoasă versiune a ta.
-            </p>
-            <Link 
-              href="#contact" 
-              onClick={(e) => handleClick(e, 'contact')}
-              className="bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded-md text-center font-medium transition-colors inline-block w-fit"
+            <h2 className="text-xs font-semibold uppercase tracking-[0.2em] text-red-500">Contact</h2>
+            <p className="text-zinc-300">Scrie-mi pe WhatsApp și stabilim împreună următorii pași.</p>
+            <a
+              href={WHATSAPP_URL}
+              {...EXTERNAL_LINK_PROPS}
+              className="inline-flex min-h-11 w-fit items-center gap-2 rounded-full bg-red-600 px-5 text-sm font-semibold uppercase tracking-wider text-white transition-colors hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-red-500"
             >
-              Contactează-mă
-            </Link>
+              <FaWhatsapp className="h-4 w-4" aria-hidden="true" />
+              Scrie-mi
+            </a>
           </div>
         </div>
-        
-        <div className="pt-8 border-t border-zinc-800 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-zinc-400 text-sm mb-4 md:mb-0">
-            © {new Date().getFullYear()} Paul Apostol. Toate drepturile rezervate.
-          </p>
-          
-          {/* <div className="flex gap-6 text-sm text-zinc-400">
-            <Link href="#" className="hover:text-red-500 transition-colors">Termeni și Condiții</Link>
-            <Link href="#" className="hover:text-red-500 transition-colors">Politica de Confidențialitate</Link>
-          </div> */}
+
+        <div className="mt-14 flex flex-col gap-4 border-t border-white/10 pt-8 text-sm text-zinc-500 md:flex-row md:items-center md:justify-between">
+          <p>© {new Date().getFullYear()} Paul Apostol. Toate drepturile rezervate.</p>
+          <Link href="/politica-de-confidentialitate" className="text-zinc-400 transition-colors hover:text-white">
+            Politica de confidențialitate
+          </Link>
         </div>
       </div>
     </footer>
