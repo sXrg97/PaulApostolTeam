@@ -98,9 +98,22 @@ export const Footer = () => {
 
         <div className="mt-14 flex flex-col gap-4 border-t border-white/10 pt-8 text-sm text-zinc-500 md:flex-row md:items-center md:justify-between">
           <p>© {new Date().getFullYear()} Paul Apostol. Toate drepturile rezervate.</p>
-          <Link href="/politica-de-confidentialitate" className="text-zinc-400 transition-colors hover:text-white">
-            Politica de confidențialitate
-          </Link>
+          <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-6">
+            <Link href="/politica-de-confidentialitate" className="text-zinc-400 transition-colors hover:text-white">
+              Politica de confidențialitate
+            </Link>
+            <p>
+              Developed by{' '}
+              <a
+                href="https://sergiumarcu.ro"
+                target="_blank"
+                rel="noopener"
+                className="font-medium text-zinc-400 underline-offset-4 transition-colors hover:text-red-500 hover:underline"
+              >
+                Sergiu Marcu
+              </a>
+            </p>
+          </div>
         </div>
       </div>
     </footer>
