@@ -20,6 +20,12 @@ const activityOptions = [
 
 const fieldClass =
   'w-full min-h-12 rounded-xl border border-white/10 bg-black/40 px-4 text-base text-white placeholder:text-zinc-500 outline-none transition-colors focus:border-red-500 focus:ring-2 focus:ring-red-500/30';
+const LIMITS = {
+  weight: { min: 30, max: 300 },
+  height: { min: 100, max: 250 },
+  age: { min: 15, max: 100 },
+};
+
 const labelClass = 'mb-2 block text-sm font-medium text-zinc-300';
 
 export const CalorieCalculator = () => {
@@ -41,18 +47,34 @@ export const CalorieCalculator = () => {
       return;
     }
 
-    if (parseFloat(weight) <= 0 || parseFloat(height) <= 0 || parseFloat(age) <= 0) {
-      setError('Te rugăm să introduci valori pozitive pentru greutate, înălțime și vârstă.');
+    const w = parseFloat(weight.replace(',', '.'));
+    const h = parseFloat(height.replace(',', '.'));
+    const a = parseFloat(age.replace(',', '.'));
+
+    // Limite realiste, ca formula să dea un rezultat cu sens
+    const checks: [number, number, number, string][] = [
+      [w, LIMITS.weight.min, LIMITS.weight.max, `Greutatea trebuie să fie între ${LIMITS.weight.min} și ${LIMITS.weight.max} kg.`],
+      [h, LIMITS.height.min, LIMITS.height.max, `Înălțimea trebuie să fie între ${LIMITS.height.min} și ${LIMITS.height.max} cm.`],
+      [a, LIMITS.age.min, LIMITS.age.max, `Vârsta trebuie să fie între ${LIMITS.age.min} și ${LIMITS.age.max} de ani.`],
+    ];
+    const failed = checks.find(([v, min, max]) => !Number.isFinite(v) || v < min || v > max);
+    if (failed) {
+      setError(failed[3]);
       return;
     }
 
     let result = 0;
     if (gender === 'female') {
-      result = 655.1 + (9.563 * parseFloat(weight)) + (1.85 * parseFloat(height)) - (4.676 * parseFloat(age));
+      result = 655.1 + (9.563 * w) + (1.85 * h) - (4.676 * a);
     } else {
-      result = 66.47 + (13.75 * parseFloat(weight)) + (5.003 * parseFloat(height)) - (6.755 * parseFloat(age));
+      result = 66.47 + (13.75 * w) + (5.003 * h) - (6.755 * a);
     }
     result *= parseFloat(activityLevel);
+
+    if (!Number.isFinite(result) || result <= 0) {
+      setError('Nu am putut calcula un rezultat pentru valorile introduse. Verifică datele și încearcă din nou.');
+      return;
+    }
     setBmr(Math.round(result));
   };
 
@@ -82,7 +104,8 @@ export const CalorieCalculator = () => {
               id="weight-input"
               type="number"
               inputMode="decimal"
-              min="1"
+              min={LIMITS.weight.min}
+              max={LIMITS.weight.max}
               value={weight}
               onChange={(e) => setWeight(e.target.value)}
               className={fieldClass}
@@ -95,7 +118,8 @@ export const CalorieCalculator = () => {
               id="height-input"
               type="number"
               inputMode="decimal"
-              min="1"
+              min={LIMITS.height.min}
+              max={LIMITS.height.max}
               value={height}
               onChange={(e) => setHeight(e.target.value)}
               className={fieldClass}
@@ -108,7 +132,8 @@ export const CalorieCalculator = () => {
               id="age-input"
               type="number"
               inputMode="numeric"
-              min="1"
+              min={LIMITS.age.min}
+              max={LIMITS.age.max}
               value={age}
               onChange={(e) => setAge(e.target.value)}
               className={fieldClass}
