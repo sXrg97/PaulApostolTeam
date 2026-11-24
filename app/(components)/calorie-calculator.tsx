@@ -3,6 +3,20 @@
 import { useState } from 'react';
 import { Calculator, Info } from 'lucide-react';
 import { btnPrimary } from '../lib/ui';
+import { CustomSelect } from './custom-select';
+
+const genderOptions = [
+  { value: 'female', label: 'Feminin' },
+  { value: 'male', label: 'Masculin' },
+];
+
+const activityOptions = [
+  { value: '1.2', label: 'Sedentar (0-1 antrenamente/săptămână)' },
+  { value: '1.37', label: 'Activitate ușoară (1-3 antrenamente/săptămână)' },
+  { value: '1.55', label: 'Activitate moderată (3-5 antrenamente/săptămână)' },
+  { value: '1.72', label: 'Activitate foarte activă (6-7 antrenamente/săptămână)' },
+  { value: '1.9', label: 'Activitate extremă (sportivi de performanță)' },
+];
 
 const fieldClass =
   'w-full min-h-12 rounded-xl border border-white/10 bg-black/40 px-4 text-base text-white placeholder:text-zinc-500 outline-none transition-colors focus:border-red-500 focus:ring-2 focus:ring-red-500/30';
@@ -59,16 +73,8 @@ export const CalorieCalculator = () => {
       <form onSubmit={calculateBMR} noValidate className="mt-8">
         <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
           <div>
-            <label htmlFor="gender-select" className={labelClass}>Gen</label>
-            <select
-              id="gender-select"
-              value={gender}
-              onChange={(e) => setGender(e.target.value)}
-              className={fieldClass}
-            >
-              <option value="female">Feminin</option>
-              <option value="male">Masculin</option>
-            </select>
+            <span id="gender-label" className={labelClass}>Gen</span>
+            <CustomSelect id="gender-select" labelId="gender-label" value={gender} options={genderOptions} onChange={setGender} />
           </div>
           <div>
             <label htmlFor="weight-input" className={labelClass}>Greutate (kg)</label>
@@ -110,19 +116,8 @@ export const CalorieCalculator = () => {
             />
           </div>
           <div className="md:col-span-2">
-            <label htmlFor="activity-select" className={labelClass}>Nivel de activitate</label>
-            <select
-              id="activity-select"
-              value={activityLevel}
-              onChange={(e) => setActivityLevel(e.target.value)}
-              className={fieldClass}
-            >
-              <option value="1.2">Sedentar (0-1 antrenamente/săptămână)</option>
-              <option value="1.37">Activitate ușoară (1-3 antrenamente/săptămână)</option>
-              <option value="1.55">Activitate moderată (3-5 antrenamente/săptămână)</option>
-              <option value="1.72">Activitate foarte activă (6-7 antrenamente/săptămână)</option>
-              <option value="1.9">Activitate extremă (sportivi de performanță)</option>
-            </select>
+            <span id="activity-label" className={labelClass}>Nivel de activitate</span>
+            <CustomSelect id="activity-select" labelId="activity-label" value={activityLevel} options={activityOptions} onChange={setActivityLevel} />
           </div>
         </div>
 
