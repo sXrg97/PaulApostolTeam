@@ -8,7 +8,7 @@
  *
  * Cat timp constanta e goala, butoanele de recenzii nu sunt afisate pe site.
  */
-export const GOOGLE_PLACE_ID = "";
+export const GOOGLE_PLACE_ID = "ChIJs8xb9aldRUcRLmUPeP499nk";
 
 export const GOOGLE_WRITE_REVIEW_URL = GOOGLE_PLACE_ID
   ? `https://search.google.com/local/writereview?placeid=${GOOGLE_PLACE_ID}`
